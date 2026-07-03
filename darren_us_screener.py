@@ -2,8 +2,10 @@
 """
 데런식 주말 워치리스트 자동 스크리너 (미국장) + 텔레그램 알림
 =============================================================
-GitHub Actions 클라우드 실행용 버전.
-토큰/chat_id는 환경변수(GitHub Secrets)에서만 읽습니다.
+GitHub Actions 클라우드 실행용 버전 v2.
+- 토큰/chat_id는 환경변수(GitHub Secrets)에서만 읽습니다.
+- v2 변경점: Secret이 없으면 스캔 시작 전에 즉시 실패(빨간 X)하여
+  '스캔은 성공했는데 메시지만 조용히 안 오는' 상황을 방지합니다.
 
 원본 조건식 (exch만 미국으로 변경):
 (exch(nyse,nasdaq) and advol(60) > 30 and advol(20) > 30
@@ -43,11 +45,51 @@ BATCH_SIZE = 200          # yfinance 배치 다운로드 크기
 HISTORY_PERIOD = "2y"     # 정밀 스캔용 데이터 기간 (200봉 이상 확보)
 
 # 텔레그램 — GitHub Secrets에서 주입됨 (코드에 토큰을 넣지 마세요)
-TELEGRAM_TOKEN = os.environ.get("DARREN_TG_TOKEN", "")
-TELEGRAM_CHAT_ID = os.environ.get("DARREN_TG_CHAT", "")  # 비우면 자동 탐지
+TELEGRAM_TOKEN = os.environ.get("DARREN_TG_TOKEN", "").strip()
+TELEGRAM_CHAT_ID = os.environ.get("DARREN_TG_CHAT", "").strip()  # 비우면 자동 탐지
 
 NASDAQ_LISTED_URL = "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt"
 OTHER_LISTED_URL = "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt"
+
+
+# ============================================================
+# 사전 점검: Secret 없으면 스캔 전에 즉시 실패
+# ============================================================
+def preflight_check():
+    """토큰 유효성 + chat_id 확보를 스캔 전에 검증. 실패 시 즉시 종료."""
+    if not TELEGRAM_TOKEN:
+        print("=" * 60)
+        print("❌ DARREN_TG_TOKEN Secret이 설정되지 않았습니다.")
+        print("   저장소 → Settings → Secrets and variables → Actions")
+        print("   → New repository secret → 이름: DARREN_TG_TOKEN")
+        print("=" * 60)
+        sys.exit(1)
+
+    # 토큰 생존 확인 (getMe)
+    try:
+        r = requests.get(
+            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/getMe",
+            timeout=15,
+        )
+        data = r.json()
+        if not data.get("ok"):
+            print(f"❌ 토큰이 유효하지 않습니다 (폐기된 토큰?): {data}")
+            sys.exit(1)
+        print(f"✅ 봇 연결 확인: @{data['result'].get('username', '?')}")
+    except Exception as e:
+        print(f"❌ 텔레그램 API 접속 실패: {e}")
+        sys.exit(1)
+
+    # chat_id 확보
+    chat_id = resolve_chat_id()
+    if not chat_id:
+        print("=" * 60)
+        print("❌ chat_id를 확보하지 못했습니다.")
+        print("   방법 1(권장): DARREN_TG_CHAT Secret에 chat_id 숫자 등록")
+        print("   방법 2: 봇에게 메시지를 하나 보낸 직후 재실행")
+        print("=" * 60)
+        sys.exit(1)
+    print(f"✅ chat_id 확인: {chat_id}")
 
 
 # ============================================================
@@ -57,9 +99,6 @@ def resolve_chat_id() -> str:
     """
     TELEGRAM_CHAT_ID가 비어 있으면 getUpdates에서 자동으로 찾는다.
     (사전에 봇에게 아무 메시지나 하나 보내둬야 함)
-    ※ getUpdates 기록은 24시간 뒤 사라질 수 있으므로,
-      첫 실행 로그에 찍히는 chat_id를 DARREN_TG_CHAT Secret으로
-      등록해 두면 이후에는 항상 안정적으로 동작합니다.
     """
     global TELEGRAM_CHAT_ID
     if TELEGRAM_CHAT_ID:
@@ -78,9 +117,6 @@ def resolve_chat_id() -> str:
                     print("→ 이 값을 GitHub Secret DARREN_TG_CHAT 에 "
                           "등록해 두면 이후 실행이 안정적입니다.")
                     return TELEGRAM_CHAT_ID
-        print("chat_id를 찾지 못했습니다. 봇에게 먼저 아무 메시지나 "
-              "하나 보낸 뒤 다시 실행하거나, DARREN_TG_CHAT Secret을 "
-              "직접 등록하세요.")
     except Exception as e:
         print(f"getUpdates 오류: {e}")
     return ""
@@ -297,10 +333,6 @@ def run_us_scan(verbose: bool = True) -> tuple[pd.DataFrame, str]:
 # ============================================================
 def send_telegram(text: str) -> bool:
     """텔레그램 Bot API로 메시지 전송. 4096자 제한 자동 분할."""
-    if not TELEGRAM_TOKEN:
-        print("DARREN_TG_TOKEN이 설정되지 않았습니다 (GitHub Secrets 확인).")
-        return False
-
     chat_id = resolve_chat_id()
     if not chat_id:
         print("chat_id가 없어 전송을 건너뜁니다.")
@@ -358,8 +390,11 @@ def format_report(result: pd.DataFrame, tv_string: str) -> str:
 # 메인
 # ============================================================
 def main():
+    # Secret 미설정/토큰 무효/chat_id 실패 시 여기서 즉시 빨간 X
+    preflight_check()
+
     send_telegram("🔍 데런식 US 스캔 시작 (GitHub Actions). "
-                  "완료까지 20~40분 소요됩니다.")
+                  "완료까지 15~40분 소요됩니다.")
 
     result, tv_string = run_us_scan(verbose=True)
 
@@ -371,9 +406,12 @@ def main():
 
     report = format_report(result, tv_string)
     sent = send_telegram(report)
-    print("텔레그램 전송 완료" if sent else "텔레그램 전송 실패 — 콘솔 출력:")
-    if not sent:
+    if sent:
+        print("텔레그램 전송 완료")
+    else:
+        print("텔레그램 전송 실패 — 콘솔 출력:")
         print(report)
+        sys.exit(1)  # 전송 실패도 빨간 X로 표시
 
 
 if __name__ == "__main__":
