@@ -1,0 +1,45 @@
+# 데런식 US 주말 스캔 자동 실행 워크플로우
+# 위치: 저장소의 .github/workflows/darren_scan.yml 에 저장해야 합니다 (경로 정확히!)
+#
+# 실행 시각: 매주 토요일 00:00 UTC = 한국시간 토요일 오전 9시
+#            (금요일 미국장 마감 후 데이터가 정리된 시점)
+# 수동 실행: GitHub 저장소 → Actions 탭 → 이 워크플로우 → Run workflow 버튼
+
+name: Darren US Weekend Scan
+
+on:
+  schedule:
+    - cron: "0 0 * * 6"   # 매주 토요일 00:00 UTC (KST 토요일 09:00)
+  workflow_dispatch:        # Actions 탭에서 수동 실행 버튼 활성화
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install yfinance pandas requests
+
+      - name: 데런식 스캔 실행
+        env:
+          DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
+          DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
+        run: python darren_us_screener.py
+
+      - name: 결과 CSV 아티팩트 업로드 (30일 보관)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: darren-watchlist-csv
+          path: darren_us_watchlist_*.csv
+          retention-days: 30
+          if-no-files-found: ignore
