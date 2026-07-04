@@ -1,0 +1,45 @@
+# 데런식 KR 주말 스캔 자동 실행 워크플로우 (개별주: KOSPI+KOSDAQ)
+# 위치: 저장소의 .github/workflows/darren_kr_scan.yml 에 저장 (경로 정확히!)
+#
+# 실행 시각: 매주 토요일 23:00 UTC(금) = 한국시간 토요일 오전 8시
+#            (US 스캔은 토 09:00 KST, KR은 토 08:00 KST로 서로 겹치지 않음)
+# 수동 실행: GitHub 저장소 → Actions 탭 → 이 워크플로우 → Run workflow
+
+name: Darren KR Weekend Scan
+
+on:
+  schedule:
+    - cron: "0 23 * * 5"   # 금요일 23:00 UTC = 토요일 08:00 KST
+  workflow_dispatch:         # Actions 탭에서 수동 실행 버튼 활성화
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install pykrx pandas requests
+
+      - name: 데런식 KR 스캔 실행
+        env:
+          DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
+          DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
+        run: python darren_kr_screener.py
+
+      - name: 결과 CSV 아티팩트 업로드 (30일 보관)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: darren-kr-watchlist-csv
+          path: darren_kr_watchlist_*.csv
+          retention-days: 30
+          if-no-files-found: ignore
