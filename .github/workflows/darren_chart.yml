@@ -1,0 +1,50 @@
+# ============================================================
+# 데런 개별 종목 차트 생성 — GitHub Actions 워크플로우
+# ============================================================
+# 텔레그램 스캔 결과의 "📊 티커" 버튼을 누르면 Cloudflare Worker가
+# 이 워크플로우를 workflow_dispatch(inputs 포함)로 호출한다.
+#
+# 저장 위치: 저장소의 .github/workflows/darren_chart.yml
+#
+# 입력값(inputs):
+#   ticker : 종목 티커 (예: NVDA, 005930)
+#   market : "US" 또는 "KR"
+# ============================================================
+
+name: Darren Chart Generator
+
+on:
+  workflow_dispatch:
+    inputs:
+      ticker:
+        description: "종목 티커"
+        required: true
+      market:
+        description: "시장 구분 (US 또는 KR)"
+        required: true
+        default: "US"
+
+jobs:
+  generate-chart:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install yfinance pandas mplfinance requests
+
+      - name: 차트 생성 및 텔레그램 전송
+        env:
+          DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
+          DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
+          TICKER: ${{ github.event.inputs.ticker }}
+          MARKET: ${{ github.event.inputs.market }}
+        run: python chart_generator.py
