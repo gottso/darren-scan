@@ -1,9 +1,19 @@
-# 데런식 US 주말 스캔 자동 실행 워크플로우
-# 위치: 저장소의 .github/workflows/darren_scan.yml 에 저장해야 합니다 (경로 정확히!)
-#
+# ============================================================
+# 데런식 US 주말 스캔 — GitHub Actions 워크플로우
+# ============================================================
 # 실행 시각: 매주 토요일 00:00 UTC = 한국시간 토요일 오전 9시
 #            (금요일 미국장 마감 후 데이터가 정리된 시점)
 # 수동 실행: GitHub 저장소 → Actions 탭 → 이 워크플로우 → Run workflow 버튼
+#
+# 스텝 구성:
+#  1) 스캔 실행 (기존 darren_us_screener.py — 수정 없음)
+#  2) 변화 리포트 전송 (send_diff_report.py — 추가/유지/제외)   ← 신규
+#  3) 종목별 차트 버튼 메시지 전송 (send_chart_buttons.py)
+#  4) 비교용 상태 파일(state/) 커밋                              ← 신규
+#  5) 결과 CSV 아티팩트 업로드
+#
+# 주의: 상태 파일 커밋을 위해 permissions: contents: write 가 필요합니다.
+# ============================================================
 
 name: Darren US Weekend Scan
 
@@ -11,6 +21,9 @@ on:
   schedule:
     - cron: "0 0 * * 6"   # 매주 토요일 00:00 UTC (KST 토요일 09:00)
   workflow_dispatch:        # Actions 탭에서 수동 실행 버튼 활성화
+
+permissions:
+  contents: write           # state/ 상태 파일 커밋용
 
 jobs:
   scan:
@@ -34,6 +47,36 @@ jobs:
           DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
           DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
         run: python darren_us_screener.py
+
+      - name: 스캔 변화 리포트 전송 (추가/유지/제외)
+        env:
+          DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
+          DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
+          MARKET: US
+        run: python send_diff_report.py
+
+      - name: 종목별 차트 버튼 메시지 전송
+        env:
+          DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
+          DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
+          MARKET: US
+        run: python send_chart_buttons.py
+
+      - name: 비교용 상태 파일 커밋
+        run: |
+          if [ ! -f "state/last_us_tickers.txt" ]; then
+            echo "상태 파일 없음 - 커밋 생략"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state/
+          if git diff --staged --quiet; then
+            echo "변경 없음 - 커밋 생략"
+          else
+            git commit -m "chore: US 스캔 상태 업데이트 [skip ci]"
+            git push || (git pull --rebase && git push)
+          fi
 
       - name: 결과 CSV 아티팩트 업로드 (30일 보관)
         if: always()
