@@ -40,8 +40,9 @@ STATE_DIR = "state"
 STATE_FILE = os.path.join(STATE_DIR, f"last_{MARKET.lower()}_tickers.txt")
 
 # CSV 컬럼명이 스크리너 버전에 따라 다를 수 있어 후보를 여러 개 두고 자동 탐지
-TICKER_COL_CANDIDATES = ["ticker", "Ticker", "종목", "종목코드", "symbol", "Symbol"]
-NAME_COL_CANDIDATES = ["name", "Name", "종목명", "이름", "회사명", "company"]
+# (실제 확인된 컬럼: '티커','종목명','시장','sector','종가','advol60_억','natr50_%','gap20선_%','봉수','ipo')
+TICKER_COL_CANDIDATES = ["티커", "ticker", "Ticker", "종목", "종목코드", "symbol", "Symbol"]
+NAME_COL_CANDIDATES = ["종목명", "name", "Name", "이름", "회사명", "company"]
 
 MAX_MSG = 3500  # 텔레그램 4096자 제한 대비 여유
 
