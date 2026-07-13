@@ -31,15 +31,34 @@ TG_CHAT = os.environ.get("DARREN_TG_CHAT", "")
 TOP_N = int(os.environ.get("TOP_N", "40"))
 
 # CSV 컬럼명이 스크리너 버전에 따라 다를 수 있어 후보를 여러 개 두고 자동 탐지한다.
-TICKER_COL_CANDIDATES = ["ticker", "Ticker", "종목", "종목코드", "symbol", "Symbol"]
+# (실제 확인된 컬럼: '티커','종목명','시장','sector','종가','advol60_억','natr50_%','gap20선_%','봉수','ipo')
+TICKER_COL_CANDIDATES = ["티커", "ticker", "Ticker", "종목", "종목코드", "symbol", "Symbol"]
 SECTOR_COL_CANDIDATES = ["sector", "Sector", "섹터", "업종"]
 DOLLARVOL_COL_CANDIDATES = ["dollar_vol", "DollarVol", "advol", "거래대금", "dollar_volume", "AdVol"]
+MARKET_TYPE_COL_CANDIDATES = ["시장", "market", "Market", "구분"]  # KR: 코스피/코스닥 구분용
 
 
-def find_column(df, candidates):
+def find_column(df, candidates, contains=None):
     for c in candidates:
         if c in df.columns:
             return c
+    # 정확히 일치하는 컬럼이 없으면 부분 문자열로도 한 번 더 탐색
+    # (예: 'advol60_억' 처럼 접미사가 붙은 실제 컬럼명 대응)
+    seeds = contains if contains else candidates
+    for col in df.columns:
+        for seed in seeds:
+            if seed.lower() in str(col).lower():
+                return col
+    return None
+
+
+def resolve_kr_suffix(market_value):
+    """'시장' 컬럼 값으로 코스피/코스닥을 판별해 야후 파이낸스 접미사를 정한다."""
+    v = str(market_value).strip().upper()
+    if "코스닥" in v or "KOSDAQ" in v or v == "KQ":
+        return ".KQ"
+    if "코스피" in v or "KOSPI" in v or v == "KS":
+        return ".KS"
     return None
 
 
@@ -65,6 +84,18 @@ def tg_send(text, reply_markup=None):
     except Exception as e:
         print(f"전송 실패: {e}")
         return False
+
+
+def normalize_ticker(raw):
+    """CSV에서 숫자로 읽혀 앞자리 0이 잘린 KR 종목코드를 6자리로 복원한다."""
+    t = str(raw).strip().upper()
+    if t.endswith(".0"):  # pandas가 float으로 읽은 경우 (예: 5930.0)
+        t = t[:-2]
+    if MARKET == "KR" and t.replace(".KS", "").replace(".KQ", "").isdigit():
+        core = t.replace(".KS", "").replace(".KQ", "")
+        suffix = ".KS" if t.endswith(".KS") else (".KQ" if t.endswith(".KQ") else "")
+        t = core.zfill(6) + suffix
+    return t
 
 
 def chunk_buttons(tickers, per_row=4):
@@ -93,13 +124,27 @@ def main():
 
     ticker_col = find_column(df, TICKER_COL_CANDIDATES)
     sector_col = find_column(df, SECTOR_COL_CANDIDATES)
-    dv_col = find_column(df, DOLLARVOL_COL_CANDIDATES)
+    dv_col = find_column(df, DOLLARVOL_COL_CANDIDATES, contains=["advol", "dollar", "거래대금"])
+    market_type_col = find_column(df, MARKET_TYPE_COL_CANDIDATES)
 
     if not ticker_col:
         print(f"티커 컬럼을 찾지 못했습니다 (컬럼 목록: {list(df.columns)}). 버튼 전송을 건너뜁니다.")
         return
 
+    # 앞자리 0 복원 + (가능하면) 코스피/코스닥 접미사를 티커 자체에 붙여 넣는다.
+    # → chart_generator.py가 KS/KQ를 추측할 필요 없이 바로 정확한 심볼로 요청됨.
+    df[ticker_col] = df[ticker_col].astype(str).apply(normalize_ticker)
+    if MARKET == "KR" and market_type_col:
+        def append_suffix(row):
+            t = row[ticker_col]
+            if t.endswith(".KS") or t.endswith(".KQ"):
+                return t
+            suf = resolve_kr_suffix(row[market_type_col])
+            return f"{t}{suf}" if suf else t
+        df[ticker_col] = df.apply(append_suffix, axis=1)
+
     if dv_col:
+        df[dv_col] = pd.to_numeric(df[dv_col], errors="coerce")
         df = df.sort_values(dv_col, ascending=False)
     df = df.head(TOP_N).copy()
 
