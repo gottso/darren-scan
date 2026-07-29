@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 """
-스캔 결과 → 종목별 "차트 보기" 버튼 메시지 전송
+스캔 결과 → 섹터 드릴다운 방식 "차트 보기" 메뉴 전송
 ================================================================================
 darren_us_screener.py / darren_kr_screener.py 실행 직후, 같은 워크플로우의
 다음 스텝으로 실행된다. 스크리너가 저장한 darren_{market}_watchlist_*.csv를
-읽어서 섹터별로 묶은 뒤, 종목마다 "📊 TICKER" 인라인 버튼 메시지를 텔레그램으로
-보낸다. 버튼을 누르면 Cloudflare Worker → GitHub Actions(darren_chart.yml)가
-실행되어 해당 종목의 일봉 차트가 도착한다.
+읽어서 섹터별로 묶고, 텔레그램 메시지는 딱 1개만 보낸다.
+
+기존(구버전)에는 섹터마다 메시지를 따로 보내서 US처럼 종목이 많을 때
+채팅창이 버튼 메시지로 도배됐다. 이번 버전은 "섹터 목록" 버튼만 담긴
+메시지 1개를 보내고, 사용자가 섹터를 탭하면 Cloudflare Worker가 같은
+메시지를 그 섹터의 종목 버튼으로 편집(수정)한다 — 새 메시지가 쌓이지 않음.
+
+Worker가 드릴다운 시점에 "섹터→티커" 매핑을 알아야 하므로, 텔레그램 전송과
+별개로 state/last_{market}_buttons.json 에 저장해 둔다. 커밋은 워크플로우의
+기존 "비교용 상태 파일 커밋" 스텝(`git add state/`)이 그대로 처리한다 —
+yml을 추가로 손댈 필요 없음.
 
 기존 스크리너 스크립트(darren_us_screener.py / darren_kr_screener.py)는
-전혀 건드리지 않는다 — 워크플로우 yml에 이 스크립트를 한 스텝 추가하는
-방식으로 통합한다.
+전혀 건드리지 않는다.
 
 입력(환경변수):
   MARKET          : "US" 또는 "KR"
@@ -20,7 +27,7 @@ darren_us_screener.py / darren_kr_screener.py 실행 직후, 같은 워크플로
 """
 import os
 import glob
-import time
+import json
 
 import pandas as pd
 import requests
@@ -29,6 +36,9 @@ MARKET = os.environ.get("MARKET", "US").strip().upper()
 TG_TOKEN = os.environ.get("DARREN_TG_TOKEN", "")
 TG_CHAT = os.environ.get("DARREN_TG_CHAT", "")
 TOP_N = int(os.environ.get("TOP_N", "40"))
+
+STATE_DIR = "state"
+BUTTONS_STATE_FILE = os.path.join(STATE_DIR, f"last_{MARKET.lower()}_buttons.json")
 
 # CSV 컬럼명이 스크리너 버전에 따라 다를 수 있어 후보를 여러 개 두고 자동 탐지한다.
 # (실제 확인된 컬럼: '티커','종목명','시장','sector','종가','advol60_억','natr50_%','gap20선_%','봉수','ipo')
@@ -98,12 +108,28 @@ def normalize_ticker(raw):
     return t
 
 
-def chunk_buttons(tickers, per_row=4):
+def save_buttons_state(sectors, total):
+    os.makedirs(STATE_DIR, exist_ok=True)
+    payload = {
+        "market": MARKET,
+        "date": pd.Timestamp.today().strftime("%Y-%m-%d"),
+        "total": total,
+        "sectors": sectors,  # [{"name": "...", "tickers": ["005930.KS", ...]}, ...]
+    }
+    with open(BUTTONS_STATE_FILE, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False)
+
+
+def sector_menu_keyboard(sectors):
+    """섹터 목록 버튼 (2개씩 한 줄). 실제 종목 버튼은 Worker가 탭 시점에 만든다."""
     keyboard = []
     row = []
-    for t in tickers:
-        row.append({"text": f"📊 {t}", "callback_data": f"chart:{MARKET}:{t}"[:64]})
-        if len(row) == per_row:
+    for idx, s in enumerate(sectors):
+        row.append({
+            "text": f"{s['name']} ({len(s['tickers'])})",
+            "callback_data": f"sec:{MARKET}:{idx}",
+        })
+        if len(row) == 2:
             keyboard.append(row)
             row = []
     if row:
@@ -148,19 +174,22 @@ def main():
         df = df.sort_values(dv_col, ascending=False)
     df = df.head(TOP_N).copy()
 
-    tg_send(f"📊 종목별 차트 보기 (상위 {len(df)}종목, {MARKET})\n버튼을 누르면 해당 종목 일봉 차트가 도착합니다.")
-
     if sector_col:
         df[sector_col] = df[sector_col].fillna("미분류")
-        for sector_name, gdf in df.groupby(sector_col, sort=False):
-            tickers = gdf[ticker_col].astype(str).tolist()
-            keyboard = chunk_buttons(tickers)
-            tg_send(f"━━ {sector_name} ({len(tickers)}) ━━", {"inline_keyboard": keyboard})
-            time.sleep(0.3)  # 텔레그램 레이트리밋 방지
+        sectors = [
+            {"name": str(name), "tickers": g[ticker_col].astype(str).tolist()}
+            for name, g in df.groupby(sector_col, sort=False)
+        ]
     else:
-        tickers = df[ticker_col].astype(str).tolist()
-        keyboard = chunk_buttons(tickers)
-        tg_send("━━ 전체 종목 ━━", {"inline_keyboard": keyboard})
+        sectors = [{"name": "전체", "tickers": df[ticker_col].astype(str).tolist()}]
+
+    save_buttons_state(sectors, len(df))
+
+    text = (
+        f"📊 종목별 차트 보기 ({MARKET}, 상위 {len(df)}종목 · {len(sectors)}개 섹터)\n"
+        f"섹터를 선택하면 종목 버튼이 나옵니다."
+    )
+    tg_send(text, {"inline_keyboard": sector_menu_keyboard(sectors)})
 
 
 if __name__ == "__main__":
