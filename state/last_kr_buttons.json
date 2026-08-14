@@ -1,1 +1,1 @@
-{"market": "KR", "date": "2026-08-09", "total": 3, "sectors": [{"name": "제약", "tickers": ["214450.KQ"]}, {"name": "유통", "tickers": ["081660.KS"]}, {"name": "화학", "tickers": ["298000.KS"]}]}
+{"market": "KR", "date": "2026-08-14", "total": 11, "sectors": [{"name": "제약", "tickers": ["207940.KS", "214450.KQ"]}, {"name": "화학", "tickers": ["010950.KS", "483650.KS", "073240.KS", "241710.KQ", "298000.KS"]}, {"name": "기타금융", "tickers": ["175330.KS"]}, {"name": "전기·전자", "tickers": ["001210.KS"]}, {"name": "음식료·담배", "tickers": ["003680.KS"]}, {"name": "부동산", "tickers": ["317400.KS"]}]}
