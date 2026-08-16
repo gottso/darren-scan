@@ -1,0 +1,86 @@
+# ============================================================
+# 데런식 ETF 스캔 (US + KR) — GitHub Actions 워크플로우
+# ============================================================
+# 저장 위치: .github/workflows/darren_etf_scan.yml
+#
+# 실행 시각: 매주 토요일 13:00 UTC = 한국시간 토요일 22:00
+# 수동 실행: Actions 탭 → Run workflow, 또는 텔레그램 "📦 ETF 스캔" 버튼
+#
+# 스텝 구성:
+#  1) ETF 스캔 실행 (darren_etf_scan.py — 핸드오프 문서 기준)
+#  2) 텔레그램 3단 드릴다운 메뉴 전송 (send_etf_buttons.py)
+#  3) state/ 커밋 → Worker가 드릴다운 시점에 GitHub API로 읽어감
+#
+# ※ pykrx를 설치하지 않는 것이 포인트.
+#    ETF 스캔은 미리 만든 CSV(us_etfs.csv / kr_etfs.csv) + yfinance만 쓰므로
+#    KRX 접속이 불필요하다. CSV는 로컬에서 make_etf_tickers.py로 생성해 커밋.
+#
+# 사전 준비(저장소 최상위에 있어야 함):
+#    darren_core.py, darren_etf_scan.py, us_etfs.csv, kr_etfs.csv,
+#    send_etf_buttons.py
+# ============================================================
+
+name: Darren ETF Scan
+
+on:
+  schedule:
+    - cron: "0 13 * * 6"   # 매주 토요일 13:00 UTC (KST 토요일 22:00)
+  workflow_dispatch:
+
+permissions:
+  contents: write           # state/ 커밋용
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install yfinance pandas numpy requests
+
+      - name: ETF 스캔 실행 (US + KR)
+        run: |
+          mkdir -p state
+          python darren_etf_scan.py --market both --datadir . \
+            --min-tier B --top 60 \
+            --csv state/etf_scan --json state/etf_payload.json
+
+      - name: 텔레그램 ETF 메뉴 전송
+        env:
+          DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
+          DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
+        run: python send_etf_buttons.py
+
+      - name: 상태 파일 커밋 (드릴다운용)
+        run: |
+          if [ ! -f "state/etf_payload.json" ]; then
+            echo "페이로드 없음 - 커밋 생략"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state/
+          if git diff --staged --quiet; then
+            echo "변경 없음 - 커밋 생략"
+          else
+            git commit -m "chore: ETF 스캔 $(date -u +%F) [skip ci]"
+            git push || (git pull --rebase && git push)
+          fi
+
+      - name: 결과 CSV 아티팩트 업로드 (30일 보관)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: darren-etf-scan-csv
+          path: state/etf_scan*.csv
+          retention-days: 30
+          if-no-files-found: ignore
