@@ -1,0 +1,81 @@
+# ============================================================
+# 데런식 KR ETF 스캔 — GitHub Actions 워크플로우
+# ============================================================
+# 저장 위치: .github/workflows/darren_etf_kr_scan.yml
+#
+# 실행 시각: 매주 금요일 23:15 UTC = 한국시간 토요일 08:15
+#           (KR 주식 스캔 08:00 KST 바로 뒤 — 필요하면 시각 조정 가능)
+# 수동 실행: Actions 탭 → Run workflow, 또는 텔레그램 "🇰🇷 KR ETF" 버튼
+#
+# pykrx를 설치하지 않는 것이 포인트. ETF 스캔은 미리 만든 kr_etfs.csv +
+# yfinance만 쓰므로 KRX 접속이 불필요하다.
+#
+# 사전 준비(저장소 최상위): darren_core.py, darren_etf_scan.py, kr_etfs.csv,
+#                          send_etf_buttons.py
+# ============================================================
+
+name: Darren KR ETF Scan
+
+on:
+  schedule:
+    - cron: "15 23 * * 5"   # 매주 금요일 23:15 UTC (KST 토요일 08:15)
+  workflow_dispatch:
+
+permissions:
+  contents: write           # state/ 커밋용
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install yfinance pandas numpy requests
+
+      - name: KR ETF 스캔 실행
+        run: |
+          mkdir -p state
+          python darren_etf_scan.py --market kr --datadir . \
+            --min-tier B --top 60 \
+            --csv state/etf_scan --json state/etf_payload_kr.json
+
+      - name: 텔레그램 KR ETF 메뉴 전송
+        env:
+          DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
+          DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
+          MARKET: KR
+        run: python send_etf_buttons.py
+
+      - name: 상태 파일 커밋 (드릴다운용)
+        run: |
+          if [ ! -f "state/etf_payload_kr.json" ]; then
+            echo "페이로드 없음 - 커밋 생략"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state/
+          if git diff --staged --quiet; then
+            echo "변경 없음 - 커밋 생략"
+          else
+            git commit -m "chore: KR ETF 스캔 $(date -u +%F) [skip ci]"
+            git push || (git pull --rebase && git push)
+          fi
+
+      - name: 결과 CSV 아티팩트 업로드 (30일 보관)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: darren-etf-kr-scan-csv
+          path: state/etf_scan_kr_etf.csv
+          retention-days: 30
+          if-no-files-found: ignore
