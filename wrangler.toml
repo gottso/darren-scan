@@ -1,0 +1,15 @@
+# ============================================================
+# Cloudflare Worker 배포 설정
+# ============================================================
+# 이 파일이 저장소 루트에 있어야 wrangler가 이 프로젝트를
+# "정적 사이트(Pages)"가 아니라 "worker.js 하나짜리 Worker"로 인식한다.
+# 없으면 "Could not detect a directory containing static files" 에러로
+# 빌드가 실패한다.
+#
+# name은 실제 Worker 이름(darren-bot)과 일치해야 같은 Worker에 배포된다.
+# 대시보드 Workers & Pages 페이지에서 Worker 이름을 확인하고 다르면 고칠 것.
+# ============================================================
+
+name = "darren-bot"
+main = "worker.js"
+compatibility_date = "2026-08-16"
