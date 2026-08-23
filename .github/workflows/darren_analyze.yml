@@ -1,0 +1,53 @@
+# ============================================================
+# 개별 종목 분석 — GitHub Actions 워크플로우
+# ============================================================
+# 저장 위치: .github/workflows/darren_analyze.yml
+#
+# 텔레그램 채팅창에 티커를 그냥 입력하면(예: NVDA, 005930)
+# Cloudflare Worker가 이 워크플로우를 실행시킨다.
+# 차트 이미지 + 데런 프레임워크 지표 카드가 텔레그램으로 온다.
+#
+# 사전 준비(저장소 최상위): darren_core.py, darren_analyze.py
+#
+# 참고: 최근 스캔 CSV(darren_{us,kr}_watchlist_*.csv)가 저장소에 있으면
+#       티어 / RS백분위 / 같은 섹터 통과 종목 수까지 표시된다.
+#       없으면 그 항목만 "—"로 표시되고 나머지는 정상 동작한다.
+# ============================================================
+
+name: Darren Ticker Analyze
+
+on:
+  workflow_dispatch:
+    inputs:
+      ticker:
+        description: "종목 티커 (예: NVDA, 005930)"
+        required: true
+      market:
+        description: "시장 구분 (US 또는 KR)"
+        required: true
+        default: "US"
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install yfinance pandas numpy mplfinance requests
+
+      - name: 분석 실행 및 텔레그램 전송
+        env:
+          DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
+          DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
+          TICKER: ${{ github.event.inputs.ticker }}
+          MARKET: ${{ github.event.inputs.market }}
+        run: python darren_analyze.py
