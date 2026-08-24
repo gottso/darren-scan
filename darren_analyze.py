@@ -29,7 +29,9 @@
     구조/맥락 판단은 여전히 사람 몫.
 
 입력(환경변수):
-  TICKER          : 종목 티커 (US: NVDA / KR: 005930 또는 005930.KS)
+  TICKER          : 티커 또는 회사 이름
+                    (NVDA / 005930 / 삼성전자 / Nvidia 모두 허용)
+                    이름이면 darren_lookup 이 티커로 변환한다.
   MARKET          : "US" 또는 "KR"
   DARREN_TG_TOKEN : 텔레그램 봇 토큰
   DARREN_TG_CHAT  : 텔레그램 chat_id
@@ -48,6 +50,7 @@ import requests
 
 import darren_core as dc
 import darren_pbo as pbo
+import darren_lookup as lookup
 
 
 TICKER_RAW = os.environ.get("TICKER", "").strip().upper()
@@ -145,19 +148,47 @@ def download(symbol, period="2y"):
         return None
 
 
+def _try_symbol(sym):
+    """심볼 하나를 받아 (심볼, df). KR이고 접미사가 없으면 .KS → .KQ 순서로 시도."""
+    if MARKET == "KR" and not sym.endswith((".KS", ".KQ")):
+        code = sym.zfill(6) if sym.isdigit() else sym
+        for suf in (".KS", ".KQ"):
+            cand = f"{code}{suf}"
+            df = download(cand)
+            if df is not None and len(df) >= 60:
+                return cand, df
+        return None, None
+    df = download(sym)
+    return (sym, df) if df is not None and len(df) >= 60 else (None, None)
+
+
 def resolve_symbol():
-    """KR은 .KS → .KQ 순서로 실재하는 심볼을 찾는다."""
-    if MARKET != "KR":
-        return TICKER_RAW, download(TICKER_RAW)
-    if TICKER_RAW.endswith((".KS", ".KQ")):
-        return TICKER_RAW, download(TICKER_RAW)
-    code = TICKER_RAW.zfill(6) if TICKER_RAW.isdigit() else TICKER_RAW
-    for suf in (".KS", ".KQ"):
-        sym = f"{code}{suf}"
-        df = download(sym)
-        if df is not None and len(df) >= 60:
-            return sym, df
-    return None, None
+    """티커 또는 회사 이름을 받아 (심볼, df, 표시이름, 대안목록).
+
+    순서:
+      1) darren_lookup 으로 해석 (티커면 그대로, 이름이면 로컬 CSV → 야후 검색)
+      2) 해석 결과로 다운로드 시도
+      3) 실패하면 이름 검색으로 한 번 더 폴백
+         (예: "TESLA"는 티커 형태지만 실재하지 않음 → 이름으로 재검색)
+    """
+    sym, disp, alts, src = lookup.resolve(TICKER_RAW, MARKET)
+    if sym:
+        got, df = _try_symbol(sym)
+        if got:
+            return got, df, disp, alts
+
+    # 폴백: 티커로 인식됐지만 실재하지 않는 경우 이름으로 재검색
+    if src == "ticker":
+        # 야후를 먼저 태운다 — US는 ETF 목록만 있어서 로컬 부분일치를 먼저 쓰면
+        # "Apple"이 AAPL 대신 파생 ETF로 잡힌다.
+        hits = lookup.search_yahoo(TICKER_RAW, MARKET) or \
+               lookup.search_local(TICKER_RAW, MARKET)
+        for cand in hits[:3]:
+            got, df = _try_symbol(cand[0])
+            if got:
+                alt = [(c[0], c[1]) for c in hits[1:6]]
+                return got, df, cand[1], alt
+    return None, None, None, []
 
 
 def get_sector(symbol):
@@ -295,10 +326,12 @@ def main():
         tg_text("⚠️ 티커가 비어 있습니다.")
         sys.exit(1)
 
-    symbol, df = resolve_symbol()
+    symbol, df, resolved_name, alternatives = resolve_symbol()
     if symbol is None or df is None or len(df) < 60:
-        tg_text(f"⚠️ '{TICKER_RAW}' 데이터를 찾지 못했습니다.\n"
-                f"티커를 확인해주세요. (KR은 6자리 코드, 최소 60거래일 필요)")
+        msg = [f"⚠️ '{TICKER_RAW}' 를 찾지 못했습니다."]
+        msg.append("티커(NVDA, 005930) 또는 회사 이름(삼성전자)으로 입력해보세요.")
+        msg.append(f"현재 {MARKET} 시장으로 검색했습니다.")
+        tg_text("\n".join(msg))
         sys.exit(1)
 
     # ── 1) 7개 필터 (스크리너와 완전히 동일한 로직) ──
@@ -328,8 +361,15 @@ def main():
 
     # ── 분석 카드 ──
     L = []
-    L.append(f"🔎 {symbol} 분석" + (f" · {name}" if name else ""))
+    disp_name = name or resolved_name
+    L.append(f"🔎 {symbol} 분석" + (f" · {disp_name}" if disp_name else ""))
     L.append(f"({dt.date.today():%Y-%m-%d} · {MARKET})")
+    # 이름으로 검색해서 찾은 경우, 무엇으로 해석했는지 밝힌다
+    if resolved_name and lookup.norm(TICKER_RAW) != lookup.norm(symbol):
+        L.append(f"'{TICKER_RAW}' → {symbol} 으로 해석했습니다.")
+        if alternatives:
+            alt_txt = ", ".join(f"{t}({n[:12]})" for t, n in alternatives[:3])
+            L.append(f"다른 후보: {alt_txt}")
     L.append("")
 
     # 스캔 조건
