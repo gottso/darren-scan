@@ -19,11 +19,14 @@
     최근 스캔 CSV에 그 티커가 있으면 거기서 가져오고, 없으면 백분위 미산출로 표시
   · 섹터 컨플루언스 2층: (a) 섹터 ETF 상태  (b) 최근 스캔의 동일 섹터 통과 수
   · 지수 상태(참고용): SPY/QQQ/IWM 또는 KOSPI/KOSDAQ의 20·50SMA 대비 + NATR
+  · WUC / CC / Setup / Setup★ — darren_pbo.py (DPBO_Sys Pine v6 일봉 트랙 이식)
+    조건 A~E 개별 통과 여부와 entry/stop/1R까지 표시
 
 【계산하지 않는 것 — 결과 카드에 명시해서 보낸다】
-  · 셋업 캔들 판정 (DPBO_Sys Pine 소스를 이식하면 추가 가능 — 현재 미구현)
   · 베이스 퀄리티(굿/보통), 어닝 임박 여부
   · 데런 공식 시장 신호등 (재량 판단이라 기계화 불가 — 별도 확인 필요)
+  · Setup은 인디케이터가 찍는 '기계적 후보'이며 매수 확정이 아니다.
+    구조/맥락 판단은 여전히 사람 몫.
 
 입력(환경변수):
   TICKER          : 종목 티커 (US: NVDA / KR: 005930 또는 005930.KS)
@@ -44,6 +47,7 @@ import mplfinance as mpf
 import requests
 
 import darren_core as dc
+import darren_pbo as pbo
 
 
 TICKER_RAW = os.environ.get("TICKER", "").strip().upper()
@@ -375,6 +379,42 @@ def main():
         L.append("  RS 백분위 — (유니버스 필요, 최근 스캔에 없는 종목)")
     L.append("")
 
+    # PBO 신호 (DPBO_Sys 이식)
+    try:
+        sig = pbo.latest_signal(df)
+    except Exception as e:
+        print(f"PBO 계산 실패: {e}")
+        sig = {}
+
+    if sig:
+        L.append("【PBO 신호 · DPBO_Sys 기준】")
+        if sig["setup_today"]:
+            g = "Setup★ (거래량 확인)" if sig["setup_best_today"] else "Setup"
+            L.append(f"  🎯 오늘 {g} 발생")
+            L.append(f"  진입 {sig['entry']:,.2f} · 스탑 {sig['stop']:,.2f} "
+                     f"· 1R {sig['t1r']:,.2f}")
+            risk = (sig["entry"] - sig["stop"]) / sig["entry"] * 100
+            L.append(f"  스탑폭 {risk:.1f}%")
+        else:
+            miss = [k for k, v in sig["cond"].items() if not v]
+            L.append(f"  셋업 없음 — 미충족 조건 {', '.join(miss) if miss else '없음'}")
+            L.append("   A위치 B선행CC C존돌파 D캔들퀄 E리스크라인")
+        if sig["cc_today"]:
+            L.append("  · 오늘 CC(수축) 발생")
+        elif sig["bars_since_cc"] is not None:
+            L.append(f"  · 최근 CC {sig['bars_since_cc']}봉 전 "
+                     f"(셋업 허용 {pbo.PBOConfig().cc_window}봉 이내)")
+        if sig["wuc_today"]:
+            L.append("  · 오늘 WUC 발생 (관찰 신호 — 매수 버튼 아님)")
+        elif sig["last_wuc_bars_ago"] is not None:
+            L.append(f"  · 최근 WUC {sig['last_wuc_bars_ago']}봉 전")
+        if not sig["setup_today"] and sig["last_setup_bars_ago"] is not None:
+            L.append(f"  · 최근 셋업 {sig['last_setup_bars_ago']}봉 전")
+        if sig["zone_high"] is not None:
+            L.append(f"  · 컨제션 존 상단 {sig['zone_high']:,.2f} "
+                     f"(종가 위치 {sig['close_pos']:.2f})")
+        L.append("")
+
     # 섹터 컨플루언스
     L.append("【섹터 컨플루언스】")
     L.append(f"  섹터: {sector or '—'}")
@@ -412,10 +452,10 @@ def main():
 
     # 자동 판정하지 않는 항목
     L.append("【봇이 판정하지 않는 것】")
-    L.append("  · 셋업 캔들 — DPBO_Sys Pine 소스 이식 시 추가 가능 (현재 미구현)")
-    L.append("  · 베이스 퀄리티, 어닝 임박, 시장 신호등")
-    L.append("  · 위 지표는 후보 압축용이며 매수 신호가 아닙니다.")
-    L.append("    진입 판단은 차트를 직접 보고 하세요.")
+    L.append("  · 베이스 퀄리티(굿/보통), 어닝 임박, 시장 신호등")
+    L.append("  · Setup은 인디케이터의 기계적 후보이지 매수 확정이 아닙니다.")
+    L.append("    구조·맥락 판단은 차트를 직접 보고 하세요.")
+    L.append("  · 장중 조회 시 마지막 봉이 미확정이라 종가에 바뀔 수 있습니다.")
 
     text = "\n".join(L)
     # 텔레그램 4096자 제한 대비 분할
