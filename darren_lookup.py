@@ -29,7 +29,12 @@ except ImportError:  # 로컬 CSV만으로도 동작하도록
     requests = None
 
 
-TICKER_COLS = ["티커", "ticker", "Ticker", "종목코드", "symbol", "Symbol", "code", "단축코드"]
+# 티커 컬럼 후보. yf_ticker 를 맨 앞에 두는 게 중요하다 —
+# kr_tickers.csv 는 yf_ticker(005930.KS)와 code(005930)를 둘 다 갖고 있는데,
+# code 를 쓰면 코스닥 종목에서 .KS 를 먼저 시도했다 실패하고 .KQ 로 재시도하게 된다.
+# yf_ticker 는 접미사가 이미 정확해서 다운로드 한 번으로 끝난다.
+TICKER_COLS = ["yf_ticker", "티커", "ticker", "Ticker", "종목코드",
+               "symbol", "Symbol", "code", "단축코드"]
 NAME_COLS = ["종목명", "name", "Name", "이름", "회사명", "company", "한글종목명"]
 
 # 로컬 후보 파일 (앞쪽이 우선)
@@ -39,6 +44,32 @@ LOCAL_SOURCES = {
 }
 
 YAHOO_SEARCH = "https://query2.finance.yahoo.com/v1/finance/search"
+
+# 한글 발음 → 공식 표기 별칭.
+# kr_tickers.csv 는 2,625종목 중 352개가 영문 표기(NAVER, POSCO홀딩스, LG전자 …)라
+# 사람들이 흔히 치는 한글 발음으로는 로컬 검색이 실패한다. 야후가 받아주긴 하지만
+# 로컬에서 잡히면 더 빠르고 정확하므로, 자주 쓰는 것만 매핑해 둔다.
+# 값은 '앞부분 치환'에 쓰인다 ("네이버" → "NAVER", "엘지전자" → "LG전자").
+KR_ALIASES = {
+    "네이버": "NAVER",
+    "포스코": "POSCO",
+    "엘지": "LG",
+    "에스케이": "SK",
+    "케이티": "KT",
+    "씨제이": "CJ",
+    "지에스": "GS",
+    "에이치디": "HD",
+    "에이치디현대": "HD현대",
+    "디엘": "DL",
+    "디비": "DB",
+    "에이치엘": "HL",
+    "오씨아이": "OCI",
+    "제이더블유": "JW",
+    "케이비": "KB",
+    "비지에프": "BGF",
+    "에이치엘비": "HLB",
+    "한온": "한온",
+}
 
 # 미국 거래소 코드 화이트리스트.
 # 심볼 정규식으로 거르면 SMSN.IL(런던), NVDA.MX(멕시코) 같은 해외 상장이
@@ -112,28 +143,61 @@ def _load_local(market):
     return rows
 
 
+def expand_aliases(query, market):
+    """검색어의 한글 발음 별칭을 공식 표기로 바꾼 변형들을 반환.
+
+    "네이버"      → ["네이버", "NAVER"]
+    "엘지전자"     → ["엘지전자", "LG전자"]
+    원본을 항상 첫 번째로 둬서, 별칭 없이 맞는 경우를 우선한다.
+    """
+    variants = [query]
+    if market != "KR":
+        return variants
+    q = str(query).strip()
+    for ko, en in KR_ALIASES.items():
+        if q.startswith(ko):
+            cand = en + q[len(ko):]
+            if cand not in variants:
+                variants.append(cand)
+    return variants
+
+
 def search_local(query, market):
     """로컬 CSV에서 이름으로 검색. [(ticker, name, source), ...] 반환.
 
+    한글 발음 별칭도 함께 시도하고(“네이버” → “NAVER”), 모든 변형의 결과를
+    합산한 뒤 완전일치 → 앞부분 일치 → 부분 포함 순으로 정렬한다.
+
+    변형별로 먼저 끝내지 않고 합산하는 게 중요하다. 예를 들어 "케이티"는
+    원본으로 '케이티알파'가 앞부분 일치로 걸리지만, 별칭 "KT"로는 'KT'가
+    완전일치한다. 합산해야 완전일치인 KT가 이긴다.
+
     완전일치가 하나라도 있으면 완전일치만 돌려준다.
-    ("삼성전자"를 찾았는데 대안으로 '삼성'이 든 ETF들이 딸려 나오면 오히려 방해)
+    ("삼성전자"를 찾았는데 '삼성'이 든 ETF들이 대안으로 딸려오면 방해되므로)
     """
-    q = norm(query)
-    if not q:
-        return []
     rows = _load_local(market)
+    if not rows:
+        return []
+
     exact, starts, contains = [], [], []
-    seen = set()
-    for t, n, src in rows:
-        if t in seen:
+    seen_exact, seen_partial = set(), set()
+
+    for variant in expand_aliases(query, market):
+        q = norm(variant)
+        if not q:
             continue
-        nn = norm(n)
-        if nn == q:
-            exact.append((t, n, src)); seen.add(t)
-        elif nn.startswith(q):
-            starts.append((t, n, src)); seen.add(t)
-        elif q in nn:
-            contains.append((t, n, src)); seen.add(t)
+        for t, n, src in rows:
+            nn = norm(n)
+            if nn == q:
+                if t not in seen_exact:
+                    exact.append((t, n, src)); seen_exact.add(t)
+            elif t in seen_partial:
+                continue
+            elif nn.startswith(q):
+                starts.append((t, n, src)); seen_partial.add(t)
+            elif q in nn:
+                contains.append((t, n, src)); seen_partial.add(t)
+
     if exact:
         return exact
     return starts + contains
@@ -218,11 +282,11 @@ def resolve(query, market):
             sym = normalize_kr_code(sym)
         return sym, None, [], "ticker"
 
-    q = norm(raw)
     local = search_local(raw, market)
 
-    # 1) 로컬 완전일치
-    exact = [h for h in local if norm(h[1]) == q]
+    # 1) 로컬 완전일치 (별칭 변형도 완전일치로 인정)
+    qs = {norm(v) for v in expand_aliases(raw, market)}
+    exact = [h for h in local if norm(h[1]) in qs]
     if exact:
         best = exact[0]
         return best[0], best[1], [(t, n) for t, n, _ in exact[1:6]], f"local:{best[2]}"
