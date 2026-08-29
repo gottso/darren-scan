@@ -1,23 +1,28 @@
 {
   "us": {
     "market": "us",
-    "generated_at": "2026-08-25T08:06:01.861487+00:00",
+    "generated_at": "2026-08-29T07:07:08.503300+00:00",
     "benchmark_ok": true,
     "menu": [
       {
         "category": "기타",
-        "label": "A0/B4/C35",
-        "count": 39
+        "label": "A0/B3/C31",
+        "count": 34
       },
       {
         "category": "지수/광범위",
-        "label": "A0/B0/C23",
-        "count": 23
+        "label": "A0/B0/C18",
+        "count": 18
       },
       {
         "category": "바이오/헬스",
-        "label": "A0/B6/C2",
+        "label": "A0/B3/C5",
         "count": 8
+      },
+      {
+        "category": "국가/신흥",
+        "label": "A0/B0/C6",
+        "count": 6
       },
       {
         "category": "금융",
@@ -25,525 +30,520 @@
         "count": 6
       },
       {
-        "category": "국가/신흥",
-        "label": "A0/B0/C5",
-        "count": 5
+        "category": "원자재/에너지",
+        "label": "A0/B0/C6",
+        "count": 6
+      },
+      {
+        "category": "크립토",
+        "label": "A0/B4/C0",
+        "count": 4
       },
       {
         "category": "AI/테크",
         "label": "A0/B0/C3",
         "count": 3
-      },
-      {
-        "category": "원자재/에너지",
-        "label": "A0/B1/C0",
-        "count": 1
       }
     ],
     "categories": {
-      "바이오/헬스": [
-        {
-          "ticker": "IYH",
-          "name": "iShares U.S. Healthcare ETF",
-          "tier": "B",
-          "score": 56.7,
-          "lev": 1.0
-        },
-        {
-          "ticker": "PPH",
-          "name": "VanEck Pharmaceutical ETF",
-          "tier": "B",
-          "score": 49.9,
-          "lev": 1.0
-        },
-        {
-          "ticker": "XLV",
-          "name": "State Street Health Care Select Sector SPDR ",
-          "tier": "B",
-          "score": 48.6,
-          "lev": 1.0
-        },
-        {
-          "ticker": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "tier": "B",
-          "score": 45.4,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IBB",
-          "name": "iShares Biotechnology ETF",
-          "tier": "B",
-          "score": 45.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "VHT",
-          "name": "Vanguard Health Care ETF",
-          "tier": "B",
-          "score": 40.5,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IHI",
-          "name": "iShares U.S. Medical Devices ETF",
-          "tier": "C",
-          "score": 59.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "XBI",
-          "name": "State Street SPDR S&P Biotech ETF",
-          "tier": "C",
-          "score": 48.5,
-          "lev": 1.0
-        }
-      ],
       "기타": [
         {
           "ticker": "COWZ",
           "name": "Pacer US Cash Cows 100 ETF",
           "tier": "B",
-          "score": 54.8,
+          "score": 59.7,
           "lev": 1.0
         },
         {
           "ticker": "VFLO",
           "name": "VictoryShares Free Cash Flow ETF",
           "tier": "B",
-          "score": 51.1,
-          "lev": 1.0
-        },
-        {
-          "ticker": "MOAT",
-          "name": "VanEck Morningstar Wide Moat ETF",
-          "tier": "B",
-          "score": 50.9,
+          "score": 52.6,
           "lev": 1.0
         },
         {
           "ticker": "BWET",
           "name": "Breakwave Tanker Shipping ETF",
           "tier": "B",
-          "score": 46.2,
-          "lev": 1.0
-        },
-        {
-          "ticker": "DYNF",
-          "name": "iShares U.S. Equity Factor Rotation Active E",
-          "tier": "C",
-          "score": 67.1,
-          "lev": 1.0
-        },
-        {
-          "ticker": "FMDE",
-          "name": "Fidelity Enhanced Mid Cap Core ETF",
-          "tier": "C",
-          "score": 66.5,
-          "lev": 1.0
-        },
-        {
-          "ticker": "FEZ",
-          "name": "State Street SPDR EURO STOXX 50 ETF",
-          "tier": "C",
-          "score": 65.9,
-          "lev": 1.0
-        },
-        {
-          "ticker": "JIRE",
-          "name": "JPMorgan International Research Enhanced Equ",
-          "tier": "C",
-          "score": 64.1,
-          "lev": 1.0
-        },
-        {
-          "ticker": "RDVY",
-          "name": "First Trust Rising Dividend Achievers ETF",
-          "tier": "C",
-          "score": 60.6,
-          "lev": 1.0
-        },
-        {
-          "ticker": "VV",
-          "name": "Vanguard Morningstar Large-Cap ETF",
-          "tier": "C",
-          "score": 60.2,
-          "lev": 1.0
-        },
-        {
-          "ticker": "CGUS",
-          "name": "Capital Group Core Equity ETF",
-          "tier": "C",
-          "score": 58.9,
+          "score": 52.5,
           "lev": 1.0
         },
         {
           "ticker": "FESM",
           "name": "Fidelity Enhanced Small Cap Core ETF",
           "tier": "C",
-          "score": 58.4,
+          "score": 72.5,
           "lev": 1.0
         },
         {
-          "ticker": "SCHK",
-          "name": "Schwab 1000 Index ETF",
+          "ticker": "FMDE",
+          "name": "Fidelity Enhanced Mid Cap Core ETF",
           "tier": "C",
-          "score": 57.7,
+          "score": 69.7,
           "lev": 1.0
         },
         {
-          "ticker": "SDY",
-          "name": "State Street SPDR S&P Dividend ETF",
+          "ticker": "DYNF",
+          "name": "iShares U.S. Equity Factor Rotation Active E",
           "tier": "C",
-          "score": 57.1,
+          "score": 68.3,
           "lev": 1.0
         },
         {
           "ticker": "HDV",
           "name": "iShares Core High Dividend ETF",
           "tier": "C",
-          "score": 56.8,
+          "score": 66.5,
           "lev": 1.0
         },
         {
-          "ticker": "CGDV",
-          "name": "Capital Group Dividend Value ETF",
+          "ticker": "DFAI",
+          "name": "Dimensional International Core Equity Market",
           "tier": "C",
-          "score": 56.7,
+          "score": 65.5,
           "lev": 1.0
         },
         {
           "ticker": "UDOW",
           "name": "ProShares UltraPro Dow30",
           "tier": "C",
-          "score": 56.7,
+          "score": 60.2,
           "lev": 3.0
         },
         {
           "ticker": "VO",
           "name": "Vanguard Morningstar Mid-Cap ETF",
           "tier": "C",
-          "score": 56.5,
-          "lev": 1.0
-        },
-        {
-          "ticker": "FENI",
-          "name": "Fidelity Enhanced International ETF",
-          "tier": "C",
-          "score": 56.2,
-          "lev": 1.0
-        },
-        {
-          "ticker": "SPSM",
-          "name": "State Street SPDR Portfolio S&P 600 Small Ca",
-          "tier": "C",
-          "score": 55.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "DFAS",
-          "name": "Dimensional U.S. Small Cap ETF",
-          "tier": "C",
-          "score": 53.9,
-          "lev": 1.0
-        },
-        {
-          "ticker": "DVY",
-          "name": "iShares Select Dividend ETF",
-          "tier": "C",
-          "score": 52.9,
-          "lev": 1.0
-        },
-        {
-          "ticker": "ITOT",
-          "name": "iShares Core S&P Total U.S. Stock Market ETF",
-          "tier": "C",
-          "score": 52.7,
+          "score": 60.2,
           "lev": 1.0
         },
         {
           "ticker": "SCHD",
           "name": "Schwab US Dividend Equity ETF",
           "tier": "C",
-          "score": 52.7,
+          "score": 60.1,
           "lev": 1.0
         },
         {
-          "ticker": "FELC",
-          "name": "Fidelity Enhanced Large Cap Core ETF",
+          "ticker": "CGUS",
+          "name": "Capital Group Core Equity ETF",
           "tier": "C",
-          "score": 51.4,
+          "score": 59.8,
           "lev": 1.0
         },
         {
-          "ticker": "SPTM",
-          "name": "State Street SPDR Portfolio S&P 1500 Composi",
+          "ticker": "RDVY",
+          "name": "First Trust Rising Dividend Achievers ETF",
           "tier": "C",
-          "score": 51.2,
+          "score": 59.8,
           "lev": 1.0
         },
         {
-          "ticker": "DFUS",
-          "name": "Dimensional U.S. Equity Market ETF",
+          "ticker": "JIRE",
+          "name": "JPMorgan International Research Enhanced Equ",
           "tier": "C",
-          "score": 51.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IJR",
-          "name": "iShares Core S&P Small-Cap ETF",
-          "tier": "C",
-          "score": 50.4,
-          "lev": 1.0
-        },
-        {
-          "ticker": "SCHX",
-          "name": "Schwab U.S. Large-Cap ETF",
-          "tier": "C",
-          "score": 47.7,
-          "lev": 1.0
-        },
-        {
-          "ticker": "VBR",
-          "name": "Vanguard Morningstar Small-Cap Value ETF",
-          "tier": "C",
-          "score": 47.2,
+          "score": 58.9,
           "lev": 1.0
         },
         {
           "ticker": "AMLP",
           "name": "Alerian MLP ETF",
           "tier": "C",
-          "score": 45.4,
+          "score": 56.2,
           "lev": 1.0
         },
         {
-          "ticker": "SCHG",
-          "name": "Schwab U.S. Large-Cap Growth ETF",
+          "ticker": "MOAT",
+          "name": "VanEck Morningstar Wide Moat ETF",
           "tier": "C",
-          "score": 44.5,
+          "score": 55.8,
           "lev": 1.0
         },
         {
-          "ticker": "SDVY",
-          "name": "First Trust SMID Cap Rising Dividend Achieve",
+          "ticker": "FEZ",
+          "name": "State Street SPDR EURO STOXX 50 ETF",
           "tier": "C",
-          "score": 43.9,
+          "score": 55.2,
           "lev": 1.0
         },
         {
-          "ticker": "AVUV",
-          "name": "Avantis U.S. Small Cap Value ETF",
+          "ticker": "DFAS",
+          "name": "Dimensional U.S. Small Cap ETF",
           "tier": "C",
-          "score": 43.6,
+          "score": 54.1,
           "lev": 1.0
         },
         {
-          "ticker": "FDL",
-          "name": "First Trust Morningstar ETF",
+          "ticker": "VBR",
+          "name": "Vanguard Morningstar Small-Cap Value ETF",
           "tier": "C",
-          "score": 43.6,
+          "score": 54.1,
           "lev": 1.0
         },
         {
-          "ticker": "VB",
-          "name": "Vanguard Morningstar Small-Cap ETF",
+          "ticker": "SDY",
+          "name": "State Street SPDR S&P Dividend ETF",
           "tier": "C",
-          "score": 42.4,
+          "score": 53.3,
           "lev": 1.0
         },
         {
-          "ticker": "XLP",
-          "name": "State Street Consumer Staples Select Sector ",
+          "ticker": "DFUS",
+          "name": "Dimensional U.S. Equity Market ETF",
           "tier": "C",
-          "score": 41.6,
+          "score": 52.7,
+          "lev": 1.0
+        },
+        {
+          "ticker": "ITOT",
+          "name": "iShares Core S&P Total U.S. Stock Market ETF",
+          "tier": "C",
+          "score": 52.3,
+          "lev": 1.0
+        },
+        {
+          "ticker": "SPSM",
+          "name": "State Street SPDR Portfolio S&P 600 Small Ca",
+          "tier": "C",
+          "score": 52.3,
           "lev": 1.0
         },
         {
           "ticker": "FTCS",
           "name": "First Trust Capital Strength ETF",
           "tier": "C",
-          "score": 41.5,
+          "score": 51.9,
+          "lev": 1.0
+        },
+        {
+          "ticker": "FDL",
+          "name": "First Trust Morningstar ETF",
+          "tier": "C",
+          "score": 50.7,
+          "lev": 1.0
+        },
+        {
+          "ticker": "FENI",
+          "name": "Fidelity Enhanced International ETF",
+          "tier": "C",
+          "score": 50.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IJR",
+          "name": "iShares Core S&P Small-Cap ETF",
+          "tier": "C",
+          "score": 50.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "VB",
+          "name": "Vanguard Morningstar Small-Cap ETF",
+          "tier": "C",
+          "score": 48.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "DVY",
+          "name": "iShares Select Dividend ETF",
+          "tier": "C",
+          "score": 46.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "SDVY",
+          "name": "First Trust SMID Cap Rising Dividend Achieve",
+          "tier": "C",
+          "score": 45.5,
           "lev": 1.0
         },
         {
           "ticker": "GRNY",
           "name": "Fundstrat Granny Shots US Large Cap ETF",
           "tier": "C",
-          "score": 30.2,
+          "score": 45.4,
+          "lev": 1.0
+        },
+        {
+          "ticker": "AVUV",
+          "name": "Avantis U.S. Small Cap Value ETF",
+          "tier": "C",
+          "score": 45.1,
+          "lev": 1.0
+        },
+        {
+          "ticker": "SCHG",
+          "name": "Schwab U.S. Large-Cap Growth ETF",
+          "tier": "C",
+          "score": 41.2,
+          "lev": 1.0
+        },
+        {
+          "ticker": "XLP",
+          "name": "State Street Consumer Staples Select Sector ",
+          "tier": "C",
+          "score": 35.9,
           "lev": 1.0
         }
       ],
-      "원자재/에너지": [
+      "바이오/헬스": [
         {
-          "ticker": "HGER",
-          "name": "Harbor Commodity All-Weather Strategy ETF",
+          "ticker": "XBI",
+          "name": "State Street SPDR S&P Biotech ETF",
           "tier": "B",
-          "score": 47.5,
+          "score": 52.5,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IBB",
+          "name": "iShares Biotechnology ETF",
+          "tier": "B",
+          "score": 49.1,
+          "lev": 1.0
+        },
+        {
+          "ticker": "ARKG",
+          "name": "ARK Genomic Revolution ETF",
+          "tier": "B",
+          "score": 48.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IYH",
+          "name": "iShares U.S. Healthcare ETF",
+          "tier": "C",
+          "score": 62.2,
+          "lev": 1.0
+        },
+        {
+          "ticker": "XLV",
+          "name": "State Street Health Care Select Sector SPDR ",
+          "tier": "C",
+          "score": 60.2,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IHI",
+          "name": "iShares U.S. Medical Devices ETF",
+          "tier": "C",
+          "score": 58.3,
+          "lev": 1.0
+        },
+        {
+          "ticker": "LABU",
+          "name": "Direxion Daily S&P Biotech Bull 3X ETF",
+          "tier": "C",
+          "score": 55.2,
+          "lev": 3.0
+        },
+        {
+          "ticker": "VHT",
+          "name": "Vanguard Health Care ETF",
+          "tier": "C",
+          "score": 50.5,
+          "lev": 1.0
+        }
+      ],
+      "크립토": [
+        {
+          "ticker": "ETHA",
+          "name": "iShares Ethereum Trust ETF",
+          "tier": "B",
+          "score": 45.4,
+          "lev": 1.0
+        },
+        {
+          "ticker": "ETH",
+          "name": "Grayscale Ethereum Staking Mini ETF Shares",
+          "tier": "B",
+          "score": 44.9,
+          "lev": 1.0
+        },
+        {
+          "ticker": "FETH",
+          "name": "Fidelity Ethereum Fund",
+          "tier": "B",
+          "score": 44.5,
+          "lev": 1.0
+        },
+        {
+          "ticker": "ETHE",
+          "name": "Grayscale Ethereum Staking ETF Shares",
+          "tier": "B",
+          "score": 44.1,
           "lev": 1.0
         }
       ],
       "지수/광범위": [
         {
+          "ticker": "IDEV",
+          "name": "iShares Core MSCI International Developed Ma",
+          "tier": "C",
+          "score": 73.9,
+          "lev": 1.0
+        },
+        {
           "ticker": "EWS",
           "name": "iShares MSCI Singapore ETF",
           "tier": "C",
-          "score": 78.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "NOBL",
-          "name": "ProShares S&P 500 Dividend Aristocrats ETF",
-          "tier": "C",
-          "score": 62.7,
-          "lev": 1.0
-        },
-        {
-          "ticker": "SPHD",
-          "name": "Invesco S&P 500 High Dividend Low Volatility",
-          "tier": "C",
-          "score": 62.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "SPYD",
-          "name": "State Street SPDR Portfolio S&P 500 High Div",
-          "tier": "C",
-          "score": 62.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IWB",
-          "name": "iShares Russell 1000 ETF",
-          "tier": "C",
-          "score": 61.6,
-          "lev": 1.0
-        },
-        {
-          "ticker": "EWU",
-          "name": "iShares MSCI United Kingdom ETF",
-          "tier": "C",
-          "score": 61.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "ESGU",
-          "name": "iShares ESG Aware MSCI USA ETF",
-          "tier": "C",
-          "score": 59.1,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IQLT",
-          "name": "iShares MSCI Intl Quality Factor ETF",
-          "tier": "C",
-          "score": 58.7,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IWN",
-          "name": "iShares Russell 2000 Value ETF",
-          "tier": "C",
-          "score": 58.1,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IWV",
-          "name": "iShares Russell 3000 Fund",
-          "tier": "C",
-          "score": 57.5,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IWS",
-          "name": "iShares Russell Mid-Cap Value ETF",
-          "tier": "C",
-          "score": 57.1,
-          "lev": 1.0
-        },
-        {
-          "ticker": "SPY",
-          "name": "State Street SPDR S&P 500 ETF Trust",
-          "tier": "C",
-          "score": 55.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "VTI",
-          "name": "Vanguard Morningstar Total Stock Market ETF",
-          "tier": "C",
-          "score": 53.5,
-          "lev": 1.0
-        },
-        {
-          "ticker": "DIA",
-          "name": "State Street SPDR Dow Jones Industrial Avera",
-          "tier": "C",
-          "score": 52.5,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IWR",
-          "name": "iShares Russell Mid-Cap ETF",
-          "tier": "C",
-          "score": 52.5,
+          "score": 66.0,
           "lev": 1.0
         },
         {
           "ticker": "EWC",
           "name": "iShares MSCI Canada Index Fund",
           "tier": "C",
-          "score": 51.1,
+          "score": 61.7,
           "lev": 1.0
         },
         {
-          "ticker": "SPYM",
-          "name": "State Street SPDR Portfolio S&P 500 ETF",
+          "ticker": "IWS",
+          "name": "iShares Russell Mid-Cap Value ETF",
           "tier": "C",
-          "score": 49.4,
+          "score": 61.4,
           "lev": 1.0
         },
         {
-          "ticker": "URTH",
-          "name": "iShares MSCI World ETF",
+          "ticker": "VTI",
+          "name": "Vanguard Morningstar Total Stock Market ETF",
           "tier": "C",
-          "score": 49.3,
+          "score": 59.0,
           "lev": 1.0
         },
         {
-          "ticker": "SCHB",
-          "name": "Schwab U.S. Broad Market ETF",
+          "ticker": "NOBL",
+          "name": "ProShares S&P 500 Dividend Aristocrats ETF",
           "tier": "C",
-          "score": 45.9,
+          "score": 58.7,
           "lev": 1.0
         },
         {
-          "ticker": "IWM",
-          "name": "iShares Russell 2000 Index Fund",
+          "ticker": "IWR",
+          "name": "iShares Russell Mid-Cap ETF",
           "tier": "C",
-          "score": 44.7,
+          "score": 57.5,
+          "lev": 1.0
+        },
+        {
+          "ticker": "DIA",
+          "name": "State Street SPDR Dow Jones Industrial Avera",
+          "tier": "C",
+          "score": 55.4,
+          "lev": 1.0
+        },
+        {
+          "ticker": "SPHD",
+          "name": "Invesco S&P 500 High Dividend Low Volatility",
+          "tier": "C",
+          "score": 54.1,
+          "lev": 1.0
+        },
+        {
+          "ticker": "SPY",
+          "name": "State Street SPDR S&P 500 ETF Trust",
+          "tier": "C",
+          "score": 53.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "EWU",
+          "name": "iShares MSCI United Kingdom ETF",
+          "tier": "C",
+          "score": 53.4,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IWN",
+          "name": "iShares Russell 2000 Value ETF",
+          "tier": "C",
+          "score": 52.9,
+          "lev": 1.0
+        },
+        {
+          "ticker": "SPYD",
+          "name": "State Street SPDR Portfolio S&P 500 High Div",
+          "tier": "C",
+          "score": 52.3,
           "lev": 1.0
         },
         {
           "ticker": "VTWO",
           "name": "Vanguard Russell 2000 ETF",
           "tier": "C",
-          "score": 42.7,
+          "score": 52.1,
           "lev": 1.0
         },
         {
-          "ticker": "IVV",
-          "name": "iShares Core S&P 500 ETF",
+          "ticker": "IWM",
+          "name": "iShares Russell 2000 Index Fund",
           "tier": "C",
-          "score": 42.0,
+          "score": 51.9,
           "lev": 1.0
         },
         {
-          "ticker": "VOO",
-          "name": "Vanguard S&P 500 ETF",
+          "ticker": "IQLT",
+          "name": "iShares MSCI Intl Quality Factor ETF",
           "tier": "C",
-          "score": 41.2,
+          "score": 51.0,
           "lev": 1.0
+        },
+        {
+          "ticker": "SCHB",
+          "name": "Schwab U.S. Broad Market ETF",
+          "tier": "C",
+          "score": 49.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "EWA",
+          "name": "iShares MSCI Australia Index Fund",
+          "tier": "C",
+          "score": 41.8,
+          "lev": 1.0
+        }
+      ],
+      "금융": [
+        {
+          "ticker": "EUFN",
+          "name": "iShares MSCI Europe Financials ETF",
+          "tier": "C",
+          "score": 62.0,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IYF",
+          "name": "iShares U.S. Financial ETF",
+          "tier": "C",
+          "score": 56.2,
+          "lev": 1.0
+        },
+        {
+          "ticker": "XLF",
+          "name": "State Street Financial Select Sector SPDR ET",
+          "tier": "C",
+          "score": 52.2,
+          "lev": 1.0
+        },
+        {
+          "ticker": "KIE",
+          "name": "State Street SPDR S&P Insurance ETF",
+          "tier": "C",
+          "score": 50.5,
+          "lev": 1.0
+        },
+        {
+          "ticker": "VFH",
+          "name": "Vanguard Financials ETF",
+          "tier": "C",
+          "score": 50.4,
+          "lev": 1.0
+        },
+        {
+          "ticker": "FAS",
+          "name": "Direxion Financial Bull 3X ETF",
+          "tier": "C",
+          "score": 48.9,
+          "lev": 3.0
         }
       ],
       "AI/테크": [
@@ -551,21 +551,21 @@
           "ticker": "SKYY",
           "name": "First Trust Cloud Computing ETF",
           "tier": "C",
-          "score": 71.2,
-          "lev": 1.0
-        },
-        {
-          "ticker": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "tier": "C",
-          "score": 50.7,
+          "score": 60.4,
           "lev": 1.0
         },
         {
           "ticker": "CIBR",
           "name": "First Trust NASDAQ Cybersecurity ETF",
           "tier": "C",
-          "score": 48.5,
+          "score": 52.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "BUG",
+          "name": "Global X Cybersecurity ETF",
+          "tier": "C",
+          "score": 50.6,
           "lev": 1.0
         }
       ],
@@ -574,169 +574,176 @@
           "ticker": "IEUR",
           "name": "iShares Core MSCI Europe ETF",
           "tier": "C",
-          "score": 68.4,
+          "score": 59.1,
           "lev": 1.0
         },
         {
-          "ticker": "VGK",
-          "name": "Vanguard FTSEEuropean ETF",
+          "ticker": "ESGD",
+          "name": "iShares ESG Aware MSCI EAFE ETF",
           "tier": "C",
-          "score": 61.5,
-          "lev": 1.0
-        },
-        {
-          "ticker": "EFV",
-          "name": "iShares MSCI EAFE Value ETF",
-          "tier": "C",
-          "score": 55.9,
+          "score": 57.7,
           "lev": 1.0
         },
         {
           "ticker": "EFA",
           "name": "iShares MSCI EAFE ETF",
           "tier": "C",
-          "score": 55.3,
+          "score": 55.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "VGK",
+          "name": "Vanguard FTSEEuropean ETF",
+          "tier": "C",
+          "score": 51.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "EFV",
+          "name": "iShares MSCI EAFE Value ETF",
+          "tier": "C",
+          "score": 49.8,
           "lev": 1.0
         },
         {
           "ticker": "INDA",
           "name": "iShares MSCI India ETF",
           "tier": "C",
-          "score": 48.3,
+          "score": 22.3,
           "lev": 1.0
         }
       ],
-      "금융": [
+      "원자재/에너지": [
         {
-          "ticker": "IYF",
-          "name": "iShares U.S. Financial ETF",
+          "ticker": "FENY",
+          "name": "Fidelity MSCI Energy Index ETF",
           "tier": "C",
-          "score": 66.4,
+          "score": 51.0,
           "lev": 1.0
         },
         {
-          "ticker": "EUFN",
-          "name": "iShares MSCI Europe Financials ETF",
+          "ticker": "XOP",
+          "name": "State Street SPDR S&P Oil & Gas Exploration ",
           "tier": "C",
-          "score": 60.4,
+          "score": 49.9,
           "lev": 1.0
         },
         {
-          "ticker": "KIE",
-          "name": "State Street SPDR S&P Insurance ETF",
+          "ticker": "XLE",
+          "name": "State Street Energy Select Sector SPDR ETF",
           "tier": "C",
-          "score": 54.3,
+          "score": 47.9,
           "lev": 1.0
         },
         {
-          "ticker": "XLF",
-          "name": "State Street Financial Select Sector SPDR ET",
+          "ticker": "VDE",
+          "name": "Vanguard Energy ETF",
           "tier": "C",
-          "score": 53.0,
+          "score": 46.8,
           "lev": 1.0
         },
         {
-          "ticker": "FAS",
-          "name": "Direxion Financial Bull 3X ETF",
+          "ticker": "IYE",
+          "name": "iShares U.S. Energy ETF",
           "tier": "C",
-          "score": 48.7,
-          "lev": 3.0
+          "score": 45.7,
+          "lev": 1.0
         },
         {
-          "ticker": "VFH",
-          "name": "Vanguard Financials ETF",
+          "ticker": "HGER",
+          "name": "Harbor Commodity All-Weather Strategy ETF",
           "tier": "C",
-          "score": 44.2,
+          "score": 36.5,
           "lev": 1.0
         }
       ]
     },
     "tickers": [
-      "IYH",
       "COWZ",
       "VFLO",
-      "MOAT",
-      "PPH",
-      "XLV",
-      "HGER",
       "BWET",
-      "ARKG",
+      "XBI",
       "IBB",
-      "VHT",
-      "EWS",
-      "SKYY",
-      "IEUR",
-      "DYNF",
-      "FMDE",
-      "IYF",
-      "FEZ",
-      "JIRE",
-      "NOBL",
-      "SPHD",
-      "SPYD",
-      "IWB",
-      "VGK",
-      "EWU",
-      "RDVY",
-      "EUFN",
-      "VV",
-      "IHI",
-      "ESGU",
-      "CGUS",
-      "IQLT",
+      "ARKG",
+      "ETHA",
+      "ETH",
+      "FETH",
+      "ETHE",
+      "IDEV",
       "FESM",
-      "IWN",
-      "SCHK",
-      "IWV",
-      "IWS",
-      "SDY",
+      "FMDE",
+      "DYNF",
       "HDV",
-      "CGDV",
+      "EWS",
+      "DFAI",
+      "IYH",
+      "EUFN",
+      "EWC",
+      "IWS",
+      "SKYY",
       "UDOW",
       "VO",
-      "FENI",
-      "EFV",
-      "EFA",
-      "SPSM",
-      "SPY",
-      "KIE",
-      "DFAS",
-      "VTI",
-      "XLF",
-      "DVY",
-      "ITOT",
+      "XLV",
       "SCHD",
-      "DIA",
+      "CGUS",
+      "RDVY",
+      "IEUR",
+      "VTI",
+      "JIRE",
+      "NOBL",
+      "IHI",
+      "ESGD",
       "IWR",
-      "FELC",
-      "SPTM",
-      "EWC",
-      "DFUS",
-      "BUG",
-      "IJR",
-      "SPYM",
-      "URTH",
-      "FAS",
-      "CIBR",
-      "XBI",
-      "INDA",
-      "SCHX",
-      "VBR",
-      "SCHB",
       "AMLP",
-      "IWM",
-      "SCHG",
-      "VFH",
-      "SDVY",
-      "AVUV",
-      "FDL",
+      "IYF",
+      "EFA",
+      "MOAT",
+      "DIA",
+      "FEZ",
+      "LABU",
+      "DFAS",
+      "SPHD",
+      "VBR",
+      "SPY",
+      "EWU",
+      "SDY",
+      "IWN",
+      "CIBR",
+      "DFUS",
+      "ITOT",
+      "SPSM",
+      "SPYD",
+      "XLF",
       "VTWO",
-      "VB",
-      "IVV",
-      "XLP",
       "FTCS",
-      "VOO",
-      "GRNY"
+      "IWM",
+      "VGK",
+      "FENY",
+      "IQLT",
+      "FDL",
+      "BUG",
+      "FENI",
+      "IJR",
+      "KIE",
+      "VHT",
+      "VFH",
+      "XOP",
+      "EFV",
+      "SCHB",
+      "FAS",
+      "VB",
+      "XLE",
+      "DVY",
+      "VDE",
+      "IYE",
+      "SDVY",
+      "GRNY",
+      "AVUV",
+      "EWA",
+      "SCHG",
+      "HGER",
+      "XLP",
+      "INDA"
     ]
   }
 }
