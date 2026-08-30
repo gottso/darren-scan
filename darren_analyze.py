@@ -56,7 +56,9 @@ import darren_lookup as lookup
 TICKER_RAW = os.environ.get("TICKER", "").strip().upper()
 MARKET = os.environ.get("MARKET", "US").strip().upper()
 TG_TOKEN = os.environ.get("DARREN_TG_TOKEN", "")
-TG_CHAT = os.environ.get("DARREN_TG_CHAT", "")
+# 요청자에게 결과를 보낸다. CHAT_ID(워크플로우 입력)가 우선이고,
+# 없으면 기존처럼 소유자 채팅(DARREN_TG_CHAT)으로 간다.
+TG_CHAT = os.environ.get("CHAT_ID", "").strip() or os.environ.get("DARREN_TG_CHAT", "")
 
 CFG = dc.CFG_US_STOCK if MARKET == "US" else dc.CFG_KR_STOCK
 
@@ -90,9 +92,14 @@ FILTER_LABEL = {
     "5.깊은붕괴": "깊은붕괴 배제",
     "6.장기추세": "장기추세",
     "7.이중붕괴16": "이중붕괴(16봉)",
+    "8.주간횡보": "주간 횡보(±5%)",
+    "9.EMA10>SMA20": "단기정배열(옵션)",
+    "10.당일거래대금": "당일 거래대금(옵션)",
 }
+# 항상 표시하는 기본 필터. 9·10 은 옵션이라 실제로 실패했을 때만 덧붙인다.
 ALL_FILTERS = ["1.advol", "2.정배열21", "3.NATR", "4.하락추세",
-               "5.깊은붕괴", "6.장기추세", "7.이중붕괴16"]
+               "5.깊은붕괴", "6.장기추세", "7.이중붕괴16", "8.주간횡보"]
+OPTIONAL_FILTERS = ["9.EMA10>SMA20", "10.당일거래대금"]
 
 
 # ══════════════════════════════════════════════════════════════
@@ -373,11 +380,14 @@ def main():
     L.append("")
 
     # 스캔 조건
-    L.append(f"【스캔 7조건】 {'✅ 전부 통과' if fr.passed else f'❌ {len(failed)}개 실패'}")
+    L.append(f"【스캔 {len(ALL_FILTERS)}조건】 {'✅ 전부 통과' if fr.passed else f'❌ {len(failed)}개 실패'}")
     for f in ALL_FILTERS:
         L.append(f"  {'✅' if f not in failed else '❌'} {FILTER_LABEL[f]}")
     if "0.MIN_PRICE" in failed:
         L.append(f"  ❌ {FILTER_LABEL['0.MIN_PRICE']}")
+    for f in OPTIONAL_FILTERS:
+        if f in failed:
+            L.append(f"  ❌ {FILTER_LABEL[f]}")
     L.append("")
 
     # 가격 · 추세
@@ -391,6 +401,9 @@ def main():
     L.append(f"  20SMA 이격 {fmt(m.get('ext'))} ATR "
              f"(스위트스팟 {dc.EXT_SWEET_SPOT}, 확장 기준 {CFG.tier_b_ext_min}↑)")
     L.append(f"  52주 고점 대비 {fmt((m.get('near_high') or float('nan')) * 100, '.1f')}%")
+    wp = m.get("week_perf")
+    quiet = "🟢 횡보" if (wp is not None and not np.isnan(wp) and abs(wp) <= 5) else "🟡 변동"
+    L.append(f"  최근 1주 등락 {fmt(wp, '+.1f')}%  {quiet} (±5% 이내가 수축 구간)")
     L.append("")
 
     # 압축 · 거래량
@@ -402,7 +415,7 @@ def main():
              f"(Tier A 기준 {CFG.tier_a_liq_min} 이상)")
     L.append(f"  advol20 {fmt(m.get('advol20'), ',.0f')}{CFG.unit_label} · "
              f"advol60 {fmt(m.get('advol60'), ',.0f')}{CFG.unit_label}")
-    L.append(f"  NATR(50) {fmt(d.get('natr50'))}%")
+    L.append(f"  NATR(50) {fmt(d.get('natr50'))}%  ·  ADR(20) {fmt(m.get('adr20'))}%")
     L.append("")
 
     # 상대강도
