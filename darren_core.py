@@ -61,6 +61,26 @@ class ScanConfig:
     benchmark: str = "SPY"           # RS 계산 기준
     atr_method: str = "wilder"       # "wilder" | "sma"
 
+    # ── 신규: 주간 횡보 필터 ──────────────────────────────
+    # 최근 5거래일 등락률이 ±N% 안이어야 통과. None 이면 끈다.
+    # "Top Growth Core" 스크린의 '최근 1주 퍼포먼스 -5%~+5%' 를 옮긴 것.
+    # 지금 조용한(수축·횡보) 종목만 남기므로, 그동안 눈으로 찾던 CC 구간을
+    # 스크리너가 1차로 걸러준다. ETF 는 바스켓이라 애초에 덜 움직이므로
+    # 기본값을 두지 않는다(각 CFG 에서 지정).
+    week_perf_abs_max: float | None = None
+
+    # 최근 5거래일을 세는 기준 봉 수 (거래일 기준 1주)
+    week_perf_bars: int = 5
+
+    # ── 신규: 단기 정배열(EMA10 > SMA20) ─────────────────
+    # 기본값 False. 데런 PBO 의 풀백은 20SMA 까지 눌리는 자리를 노리는데,
+    # 그 자리에서는 EMA10 이 SMA20 아래로 내려간다. 이 조건을 켜면
+    # 정작 노리는 눌림 셋업이 걸러지므로, 실험용으로만 켤 것.
+    require_ema10_above_sma20: bool = False
+
+    # ── 신규: 당일 거래대금 하한 (0 이면 끔) ──────────────
+    today_advol_min: float = 0.0
+
     # ── 티어 판정 ──
     tier_a_contraction_max: float = 0.75   # atr5/atr20 — 낮을수록 수축
     tier_a_ext_min: float = 0.0            # 20SMA 이격 하한 (ATR 배수)
@@ -89,6 +109,31 @@ EXT_TOLERANCE = 3.0     # 여기서 ±3 ATR 벗어나면 0점
 
 def sma(s: pd.Series, n: int) -> pd.Series:
     return s.rolling(n, min_periods=n).mean()
+
+
+def ema(s: pd.Series, n: int) -> pd.Series:
+    return s.ewm(span=n, adjust=False, min_periods=n).mean()
+
+
+def adr(df: pd.DataFrame, n: int = 20) -> pd.Series:
+    """ADR% — 평균 일간 변동폭. TradingView 방식(고가/저가 비율의 평균 − 1).
+
+    NATR 과 목적은 같지만 계산이 다르다. NATR 은 ATR/종가(갭 포함),
+    ADR 은 당일 고저 폭만 본다. 둘 다 두면 중복이라 필터는 NATR 을 쓰고
+    ADR 은 표시·정렬용 참고값으로만 계산한다.
+    """
+    lo = df["Low"].replace(0, np.nan)
+    return (df["High"] / lo).rolling(n, min_periods=n).mean().sub(1.0).mul(100.0)
+
+
+def week_perf(close: pd.Series, bars: int = 5) -> float:
+    """최근 N거래일 등락률(%). 데이터가 모자라면 nan."""
+    if len(close) <= bars:
+        return np.nan
+    base = float(close.iloc[-(bars + 1)])
+    if base <= 0:
+        return np.nan
+    return (float(close.iloc[-1]) / base - 1.0) * 100.0
 
 
 def true_range(df: pd.DataFrame) -> pd.Series:
@@ -228,10 +273,30 @@ def apply_filters(df: pd.DataFrame, cfg: ScanConfig) -> FilterResult:
     if hits7:
         failed.append("7.이중붕괴16")
 
+    # 8) 주간 횡보 — 최근 5거래일 등락률이 ±N% 이내 (수축 구간만 남김)
+    v_wperf = week_perf(close, cfg.week_perf_bars)
+    if cfg.week_perf_abs_max is not None:
+        if np.isnan(v_wperf) or abs(v_wperf) > cfg.week_perf_abs_max:
+            failed.append("8.주간횡보")
+
+    # 9) 단기 정배열 (옵션 — 기본 꺼짐)
+    v_ema10 = _last(ema(close, 10))
+    if cfg.require_ema10_above_sma20:
+        if np.isnan(v_ema10) or np.isnan(v_s20) or not (v_ema10 > v_s20):
+            failed.append("9.EMA10>SMA20")
+
+    # 10) 당일 거래대금 하한 (옵션 — 0 이면 끔)
+    v_today_advol = float(
+        (df["Close"].iloc[-1] * df["Volume"].iloc[-1]) / cfg.unit_divisor)
+    if cfg.today_advol_min > 0 and not (v_today_advol > cfg.today_advol_min):
+        failed.append("10.당일거래대금")
+
     detail = {
         "bars": bars, "close": price, "sma20": v_s20, "sma50": v_s50,
         "atr50": v_a50, "natr50": v_n50, "advol60": v_av60, "advol20": v_av20,
         "hits2": hits2, "hits7": hits7,
+        "week_perf": v_wperf, "ema10": v_ema10,
+        "adr20": _last(adr(df, 20)), "today_advol": v_today_advol,
     }
     return FilterResult(len(failed) == 0, failed, detail)
 
@@ -294,6 +359,8 @@ def compute_metrics(
         "liq_ratio": liq_ratio, "contraction": contraction, "vdu": vdu,
         "ext": ext, "ret63": ret63, "rs": rs, "near_high": near_high,
         "natr50": _last(natr(df, 50, cfg.atr_method)),
+        "adr20": _last(adr(df, 20)),
+        "week_perf": week_perf(close, cfg.week_perf_bars),
     }
 
 
@@ -385,11 +452,13 @@ CFG_US_STOCK = ScanConfig(
     name="US_STOCK", advol_min=30.0, unit_divisor=1e6, unit_label="$M",
     natr_min=2.0, min_price=5.0, benchmark="SPY",
     tier_a_contraction_max=0.75, tier_a_rs_pct_min=50.0,
+    week_perf_abs_max=5.0,          # 최근 1주 ±5% 이내 = 횡보/수축 구간
 )
 CFG_KR_STOCK = ScanConfig(
     name="KR_STOCK", advol_min=300.0, unit_divisor=1e8, unit_label="억",
     natr_min=2.0, min_price=1000.0, benchmark="^KS11",
     tier_a_contraction_max=0.75, tier_a_rs_pct_min=50.0,
+    week_perf_abs_max=5.0,          # 최근 1주 ±5% 이내 = 횡보/수축 구간
 )
 # ETF는 바스켓이라 개별 종목만큼 변동성이 수축하지 않음.
 # 실측: 압축 임계값을 0.85 → 1.00 으로 풀어도 Tier A가 3 → 4 로만 늘어남(평탄 구간).
