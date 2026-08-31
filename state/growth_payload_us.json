@@ -1,0 +1,66 @@
+{
+  "market": "us",
+  "date": "2026-08-31",
+  "total": 29,
+  "sectors": [
+    {
+      "name": "Technology",
+      "tickers": [
+        "INFQ",
+        "FIG",
+        "CHYM",
+        "IOT",
+        "SHOP"
+      ]
+    },
+    {
+      "name": "Basic Materials",
+      "tickers": [
+        "ALM",
+        "MP",
+        "EXK",
+        "HL",
+        "ERO",
+        "CDE",
+        "AG",
+        "FSM",
+        "PAAS",
+        "GFI"
+      ]
+    },
+    {
+      "name": "Energy",
+      "tickers": [
+        "PBF",
+        "VG",
+        "NAT",
+        "FRO"
+      ]
+    },
+    {
+      "name": "Financial Services",
+      "tickers": [
+        "BMNR",
+        "SBET",
+        "TIGR",
+        "SOFI",
+        "NU"
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "tickers": [
+        "PSNL",
+        "CDNA"
+      ]
+    },
+    {
+      "name": "Consumer Cyclical",
+      "tickers": [
+        "CVNA",
+        "DASH",
+        "ATAT"
+      ]
+    }
+  ]
+}
