@@ -1,0 +1,89 @@
+# ============================================================
+# Top Growth Core 스캔 (US) — GitHub Actions 워크플로우
+# ============================================================
+# 저장 위치: .github/workflows/darren_growth_us_scan.yml
+#
+# 기존 7개 필터 스캔(darren_scan.yml 등)과는 **별개의 스크린**이다.
+# 둘은 서로 대체하지 않고 나란히 돌린다.
+#   기존 7개  : 건강한 상승추세 종목 전부 (돌파·풀백·수축 모두)
+#   Growth   : 매출이 크게 늘면서 지금 조용히 눌려 있는 성장주
+#
+# 실행 시각: 한국시간 토요일 09:30 (기존 스캔 30분 뒤 — 동시 실행 회피)
+#
+# 2단계 스캔이라 1단계(가격) 후 살아남은 종목에만 펀더멘털을 조회한다.
+# 사전 준비(저장소 최상위): darren_core.py, darren_growth.py, send_growth_buttons.py
+# US 유니버스는 darren_us_screener 와 동일하게 nasdaqtrader.com 에서 받으므로
+# 별도 티커 CSV 가 필요 없다.
+# ============================================================
+
+name: Darren US Growth Scan
+
+on:
+  schedule:
+    - cron: "30 0 * * 6"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 의존성 설치
+        run: pip install yfinance pandas numpy requests
+
+      - name: Growth 스캔 실행
+        run: |
+          mkdir -p state
+          python darren_growth.py --market us --datadir . \
+            --csv state/growth_scan --json state/growth_payload_us.json
+
+      - name: 텔레그램 메뉴 전송
+        env:
+          DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
+          DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
+          MARKET: US
+        run: python send_growth_buttons.py
+
+      - name: 텔레그램 채널 방송
+        env:
+          DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
+          DARREN_TG_CHANNEL: ${{ secrets.DARREN_TG_CHANNEL }}
+          MODE: growth
+          MARKET: US
+        run: python send_channel_broadcast.py
+
+      - name: 상태 파일 커밋
+        run: |
+          if [ ! -f "state/growth_payload_us.json" ]; then
+            echo "페이로드 없음 - 커밋 생략"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state/
+          if git diff --staged --quiet; then
+            echo "변경 없음"
+          else
+            git commit -m "chore: US Growth 스캔 $(date -u +%F) [skip ci]"
+            git push || (git pull --rebase && git push)
+          fi
+
+      - name: 결과 CSV 아티팩트 업로드
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: darren-growth-us-csv
+          path: state/growth_scan_us_growth.csv
+          retention-days: 30
+          if-no-files-found: ignore
