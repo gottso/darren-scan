@@ -1,0 +1,62 @@
+{
+  "market": "kr",
+  "date": "2026-08-31",
+  "total": 25,
+  "sectors": [
+    {
+      "name": "미분류",
+      "tickers": [
+        "445680.KQ",
+        "131290.KQ",
+        "126640.KQ"
+      ]
+    },
+    {
+      "name": "Financial Services",
+      "tickers": [
+        "010060.KS",
+        "001510.KS",
+        "041190.KQ",
+        "003530.KS"
+      ]
+    },
+    {
+      "name": "Technology",
+      "tickers": [
+        "389500.KQ",
+        "049630.KQ",
+        "033240.KS",
+        "039030.KQ",
+        "456010.KQ",
+        "060250.KQ",
+        "377300.KS"
+      ]
+    },
+    {
+      "name": "Industrials",
+      "tickers": [
+        "323280.KQ",
+        "382800.KQ",
+        "272210.KS",
+        "012450.KS",
+        "373220.KS"
+      ]
+    },
+    {
+      "name": "Basic Materials",
+      "tickers": [
+        "125020.KQ",
+        "010130.KS",
+        "357780.KQ",
+        "121600.KQ",
+        "005070.KS"
+      ]
+    },
+    {
+      "name": "Energy",
+      "tickers": [
+        "096770.KS"
+      ]
+    }
+  ]
+}
