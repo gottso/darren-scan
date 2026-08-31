@@ -1,33 +1,40 @@
 # ============================================================
-# 데런 개별 종목 차트 생성 — GitHub Actions 워크플로우
+# 개별 종목 분석 — GitHub Actions 워크플로우
 # ============================================================
-# 텔레그램 스캔 결과의 "📊 티커" 버튼을 누르면 Cloudflare Worker가
-# 이 워크플로우를 workflow_dispatch(inputs 포함)로 호출한다.
+# 저장 위치: .github/workflows/darren_analyze.yml
 #
-# 저장 위치: 저장소의 .github/workflows/darren_chart.yml
+# 텔레그램 채팅창에 티커를 그냥 입력하면(예: NVDA, 005930)
+# Cloudflare Worker가 이 워크플로우를 실행시킨다.
+# 차트 이미지 + 데런 프레임워크 지표 카드가 텔레그램으로 온다.
 #
-# 입력값(inputs):
-#   ticker : 종목 티커 (예: NVDA, 005930)
-#   market : "US" 또는 "KR"
+# 사전 준비(저장소 최상위): darren_core.py, darren_analyze.py
+#
+# 참고: 최근 스캔 CSV(darren_{us,kr}_watchlist_*.csv)가 저장소에 있으면
+#       티어 / RS백분위 / 같은 섹터 통과 종목 수까지 표시된다.
+#       없으면 그 항목만 "—"로 표시되고 나머지는 정상 동작한다.
 # ============================================================
 
-name: Darren Chart Generator
+name: Darren Ticker Analyze
 
 on:
   workflow_dispatch:
     inputs:
       ticker:
-        description: "종목 티커"
+        description: "종목 티커 (예: NVDA, 005930)"
         required: true
       market:
         description: "시장 구분 (US 또는 KR)"
         required: true
         default: "US"
+      chat_id:
+        description: "결과를 받을 텔레그램 chat_id (비우면 소유자에게 전송)"
+        required: false
+        default: ""
 
 jobs:
-  generate-chart:
+  analyze:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - name: 저장소 체크아웃
@@ -39,12 +46,13 @@ jobs:
           python-version: "3.12"
 
       - name: 의존성 설치
-        run: pip install yfinance pandas mplfinance requests
+        run: pip install yfinance pandas numpy mplfinance requests
 
-      - name: 차트 생성 및 텔레그램 전송
+      - name: 분석 실행 및 텔레그램 전송
         env:
           DARREN_TG_TOKEN: ${{ secrets.DARREN_TG_TOKEN }}
           DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
           TICKER: ${{ github.event.inputs.ticker }}
           MARKET: ${{ github.event.inputs.market }}
-        run: python chart_generator.py
+          CHAT_ID: ${{ github.event.inputs.chat_id }}
+        run: python darren_analyze.py
