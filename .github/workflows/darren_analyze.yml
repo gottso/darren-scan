@@ -26,6 +26,10 @@ on:
         description: "시장 구분 (US 또는 KR)"
         required: true
         default: "US"
+      chat_id:
+        description: "결과를 받을 텔레그램 chat_id (비우면 소유자에게 전송)"
+        required: false
+        default: ""
 
 jobs:
   analyze:
@@ -50,4 +54,5 @@ jobs:
           DARREN_TG_CHAT: ${{ secrets.DARREN_TG_CHAT }}
           TICKER: ${{ github.event.inputs.ticker }}
           MARKET: ${{ github.event.inputs.market }}
+          CHAT_ID: ${{ github.event.inputs.chat_id }}
         run: python darren_analyze.py
