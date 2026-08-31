@@ -61,12 +61,12 @@ class ScanConfig:
     benchmark: str = "SPY"           # RS 계산 기준
     atr_method: str = "wilder"       # "wilder" | "sma"
 
-    # ── 신규: 주간 횡보 필터 ──────────────────────────────
+    # ── 주간 횡보 필터 (기본 꺼짐) ────────────────────────
     # 최근 5거래일 등락률이 ±N% 안이어야 통과. None 이면 끈다.
-    # "Top Growth Core" 스크린의 '최근 1주 퍼포먼스 -5%~+5%' 를 옮긴 것.
-    # 지금 조용한(수축·횡보) 종목만 남기므로, 그동안 눈으로 찾던 CC 구간을
-    # 스크리너가 1차로 걸러준다. ETF 는 바스켓이라 애초에 덜 움직이므로
-    # 기본값을 두지 않는다(각 CFG 에서 지정).
+    # 기존 7개 필터 세트에서는 쓰지 않는다. 이 조건을 켜면 '수축' 단계만
+    # 남고 '돌파' 직후 종목이 사라져서, PBO 시퀀스(돌파→풀백→수축→셋업)의
+    # 앞부분을 관찰할 수 없게 되기 때문이다.
+    # 주간 횡보를 쓰는 스크린은 darren_growth.py 쪽에 따로 있다.
     week_perf_abs_max: float | None = None
 
     # 최근 5거래일을 세는 기준 봉 수 (거래일 기준 1주)
@@ -450,15 +450,19 @@ def sector_heat(rows: pd.DataFrame, group_col: str = "sector") -> pd.DataFrame:
 
 CFG_US_STOCK = ScanConfig(
     name="US_STOCK", advol_min=30.0, unit_divisor=1e6, unit_label="$M",
-    natr_min=2.0, min_price=5.0, benchmark="SPY",
+    # min_price 는 darren_us_screener.MIN_PRICE(3.0) 와 맞춘 값이다.
+    # 다르게 두면 텔레그램 분석 카드가 실제 스캔과 다른 기준으로 판정한다.
+    natr_min=2.0, min_price=3.0, benchmark="SPY",
     tier_a_contraction_max=0.75, tier_a_rs_pct_min=50.0,
-    week_perf_abs_max=5.0,          # 최근 1주 ±5% 이내 = 횡보/수축 구간
+    # 주간 횡보(±5%)는 별도 스캔(darren_growth_scan.py)으로 분리했으므로
+    # 기본 스캔에서는 끈다. week_perf 값 자체는 지표로 계속 계산·표시된다.
 )
 CFG_KR_STOCK = ScanConfig(
     name="KR_STOCK", advol_min=300.0, unit_divisor=1e8, unit_label="억",
     natr_min=2.0, min_price=1000.0, benchmark="^KS11",
     tier_a_contraction_max=0.75, tier_a_rs_pct_min=50.0,
-    week_perf_abs_max=5.0,          # 최근 1주 ±5% 이내 = 횡보/수축 구간
+    # 주간 횡보(±5%)는 별도 스캔(darren_growth_scan.py)으로 분리했으므로
+    # 기본 스캔에서는 끈다. week_perf 값 자체는 지표로 계속 계산·표시된다.
 )
 # ETF는 바스켓이라 개별 종목만큼 변동성이 수축하지 않음.
 # 실측: 압축 임계값을 0.85 → 1.00 으로 풀어도 Tier A가 3 → 4 로만 늘어남(평탄 구간).
