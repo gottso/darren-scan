@@ -1,65 +1,109 @@
 {
   "market": "us",
-  "date": "2026-08-31",
-  "total": 29,
+  "date": "2026-09-05",
+  "total": 53,
   "sectors": [
     {
-      "name": "Technology",
+      "name": "Communication Services",
       "tickers": [
-        "INFQ",
-        "FIG",
-        "CHYM",
-        "IOT",
-        "SHOP"
-      ]
-    },
-    {
-      "name": "Basic Materials",
-      "tickers": [
-        "ALM",
-        "MP",
-        "EXK",
-        "HL",
-        "ERO",
-        "CDE",
-        "AG",
-        "FSM",
-        "PAAS",
-        "GFI"
-      ]
-    },
-    {
-      "name": "Energy",
-      "tickers": [
-        "PBF",
-        "VG",
-        "NAT",
-        "FRO"
+        "RUM"
       ]
     },
     {
       "name": "Financial Services",
       "tickers": [
-        "BMNR",
-        "SBET",
+        "FIGR",
+        "LIFE",
+        "VIRT",
         "TIGR",
-        "SOFI",
-        "NU"
+        "FUTU",
+        "TPG",
+        "WT",
+        "IBKR"
+      ]
+    },
+    {
+      "name": "Technology",
+      "tickers": [
+        "INFQ",
+        "CRWD",
+        "TEAM",
+        "ZETA",
+        "SNOW",
+        "CHYM",
+        "FLYW",
+        "DLO"
+      ]
+    },
+    {
+      "name": "미분류",
+      "tickers": [
+        "BULL",
+        "BWIN"
       ]
     },
     {
       "name": "Healthcare",
       "tickers": [
+        "HTFL",
+        "CDNA",
         "PSNL",
-        "CDNA"
+        "LFST",
+        "NTRA"
+      ]
+    },
+    {
+      "name": "Energy",
+      "tickers": [
+        "DK",
+        "PARR",
+        "PBF",
+        "VG",
+        "TALO",
+        "SM",
+        "YPF",
+        "MUR",
+        "FRO",
+        "CRGY",
+        "PSX"
+      ]
+    },
+    {
+      "name": "Basic Materials",
+      "tickers": [
+        "SGML",
+        "EXK",
+        "HL",
+        "CDE",
+        "MUX",
+        "FSM",
+        "IAG",
+        "PAAS",
+        "CGAU",
+        "WPM",
+        "KGC",
+        "GFI",
+        "OR",
+        "SQM"
       ]
     },
     {
       "name": "Consumer Cyclical",
       "tickers": [
-        "CVNA",
-        "DASH",
-        "ATAT"
+        "CVNA"
+      ]
+    },
+    {
+      "name": "Industrials",
+      "tickers": [
+        "CXW",
+        "GPN"
+      ]
+    },
+    {
+      "name": "Consumer Defensive",
+      "tickers": [
+        "TAL"
       ]
     }
   ]
