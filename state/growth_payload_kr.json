@@ -1,80 +1,68 @@
 {
   "market": "kr",
-  "date": "2026-09-01",
-  "total": 34,
+  "date": "2026-09-05",
+  "total": 27,
   "sectors": [
-    {
-      "name": "Technology",
-      "tickers": [
-        "327260.KQ",
-        "080580.KQ",
-        "322000.KS",
-        "010170.KQ",
-        "425420.KQ",
-        "253590.KQ",
-        "039030.KQ",
-        "036540.KQ",
-        "007660.KS",
-        "089030.KQ",
-        "060250.KQ",
-        "377300.KS"
-      ]
-    },
-    {
-      "name": "Consumer Defensive",
-      "tickers": [
-        "003350.KS",
-        "241710.KQ",
-        "257720.KQ",
-        "192820.KS",
-        "278470.KS"
-      ]
-    },
-    {
-      "name": "Financial Services",
-      "tickers": [
-        "010060.KS",
-        "001510.KS",
-        "003530.KS",
-        "000810.KS",
-        "316140.KS"
-      ]
-    },
-    {
-      "name": "미분류",
-      "tickers": [
-        "126640.KQ",
-        "077360.KQ",
-        "083650.KQ",
-        "388050.KQ",
-        "095340.KQ",
-        "006910.KQ"
-      ]
-    },
     {
       "name": "Industrials",
       "tickers": [
-        "323280.KQ"
+        "126730.KQ",
+        "373220.KS"
       ]
     },
     {
       "name": "Basic Materials",
       "tickers": [
+        "006110.KS",
         "125020.KQ",
-        "357780.KQ",
-        "005070.KS"
+        "011780.KS"
       ]
     },
     {
-      "name": "Healthcare",
+      "name": "Communication Services",
       "tickers": [
-        "128940.KS"
+        "181710.KS"
+      ]
+    },
+    {
+      "name": "Technology",
+      "tickers": [
+        "080580.KQ",
+        "322000.KS",
+        "222800.KQ",
+        "232140.KQ",
+        "200470.KQ",
+        "253590.KQ",
+        "033240.KS",
+        "007660.KS",
+        "060250.KQ",
+        "377300.KS"
+      ]
+    },
+    {
+      "name": "미분류",
+      "tickers": [
+        "388050.KQ",
+        "077360.KQ",
+        "095340.KQ",
+        "023160.KQ"
+      ]
+    },
+    {
+      "name": "Financial Services",
+      "tickers": [
+        "041190.KQ",
+        "088350.KS",
+        "003530.KS",
+        "316140.KS"
       ]
     },
     {
       "name": "Consumer Cyclical",
       "tickers": [
-        "006730.KQ"
+        "006730.KQ",
+        "499790.KS",
+        "298020.KS"
       ]
     }
   ]
