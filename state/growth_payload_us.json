@@ -1,107 +1,41 @@
 {
   "market": "us",
-  "date": "2026-09-05",
-  "total": 53,
+  "date": "2026-09-12",
+  "total": 7,
   "sectors": [
     {
-      "name": "Communication Services",
+      "name": "Industrials",
       "tickers": [
-        "RUM"
-      ]
-    },
-    {
-      "name": "Financial Services",
-      "tickers": [
-        "FIGR",
-        "LIFE",
-        "VIRT",
-        "TIGR",
-        "FUTU",
-        "TPG",
-        "WT",
-        "IBKR"
-      ]
-    },
-    {
-      "name": "Technology",
-      "tickers": [
-        "INFQ",
-        "CRWD",
-        "TEAM",
-        "ZETA",
-        "SNOW",
-        "CHYM",
-        "FLYW",
-        "DLO"
-      ]
-    },
-    {
-      "name": "미분류",
-      "tickers": [
-        "BULL",
-        "BWIN"
-      ]
-    },
-    {
-      "name": "Healthcare",
-      "tickers": [
-        "HTFL",
-        "CDNA",
-        "PSNL",
-        "LFST",
-        "NTRA"
+        "TH"
       ]
     },
     {
       "name": "Energy",
       "tickers": [
-        "DK",
-        "PARR",
-        "PBF",
-        "VG",
-        "TALO",
-        "SM",
-        "YPF",
-        "MUR",
-        "FRO",
-        "CRGY",
-        "PSX"
+        "VIST",
+        "TALO"
       ]
     },
     {
-      "name": "Basic Materials",
+      "name": "Financial Services",
       "tickers": [
-        "SGML",
-        "EXK",
-        "HL",
-        "CDE",
-        "MUX",
-        "FSM",
-        "IAG",
-        "PAAS",
-        "CGAU",
-        "WPM",
-        "KGC",
-        "GFI",
-        "OR",
-        "SQM"
+        "WT"
       ]
     },
     {
       "name": "Consumer Cyclical",
       "tickers": [
-        "CVNA"
+        "TSLA"
       ]
     },
     {
-      "name": "Industrials",
+      "name": "Basic Materials",
       "tickers": [
-        "CXW",
-        "GPN"
+        "WPM"
       ]
     },
     {
-      "name": "Consumer Defensive",
+      "name": "미분류",
       "tickers": [
         "TAL"
       ]
