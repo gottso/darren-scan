@@ -1,7 +1,7 @@
 {
   "kr": {
     "market": "kr",
-    "generated_at": "2026-09-05T00:56:16.627422+00:00",
+    "generated_at": "2026-09-12T01:05:55.218544+00:00",
     "benchmark_ok": true,
     "menu": [
       {
@@ -16,7 +16,7 @@
           "ticker": "228790.KS",
           "name": "TIGER 화장품",
           "tier": "C",
-          "score": 94.6,
+          "score": 88.6,
           "lev": 1.0
         }
       ]
