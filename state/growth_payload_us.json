@@ -1,44 +1,6 @@
 {
   "market": "us",
-  "date": "2026-09-12",
-  "total": 7,
-  "sectors": [
-    {
-      "name": "Industrials",
-      "tickers": [
-        "TH"
-      ]
-    },
-    {
-      "name": "Energy",
-      "tickers": [
-        "VIST",
-        "TALO"
-      ]
-    },
-    {
-      "name": "Financial Services",
-      "tickers": [
-        "WT"
-      ]
-    },
-    {
-      "name": "Consumer Cyclical",
-      "tickers": [
-        "TSLA"
-      ]
-    },
-    {
-      "name": "Basic Materials",
-      "tickers": [
-        "WPM"
-      ]
-    },
-    {
-      "name": "미분류",
-      "tickers": [
-        "TAL"
-      ]
-    }
-  ]
+  "date": "2026-09-19",
+  "total": 0,
+  "sectors": []
 }
