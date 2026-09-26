@@ -1,13 +1,13 @@
 {
   "kr": {
     "market": "kr",
-    "generated_at": "2026-09-19T01:09:41.479917+00:00",
+    "generated_at": "2026-09-26T01:31:22.027072+00:00",
     "benchmark_ok": true,
     "menu": [
       {
         "category": "금융",
-        "label": "A0/B0/C1",
-        "count": 1
+        "label": "A0/B0/C2",
+        "count": 2
       },
       {
         "category": "기타",
@@ -21,7 +21,7 @@
           "ticker": "228790.KS",
           "name": "TIGER 화장품",
           "tier": "C",
-          "score": 82.4,
+          "score": 84.6,
           "lev": 1.0
         }
       ],
@@ -30,14 +30,22 @@
           "ticker": "091170.KS",
           "name": "KODEX 은행",
           "tier": "C",
-          "score": 62.5,
+          "score": 62.2,
+          "lev": 1.0
+        },
+        {
+          "ticker": "484880.KS",
+          "name": "SOL 금융지주플러스고배당",
+          "tier": "C",
+          "score": 46.1,
           "lev": 1.0
         }
       ]
     },
     "tickers": [
       "228790.KS",
-      "091170.KS"
+      "091170.KS",
+      "484880.KS"
     ]
   }
 }
