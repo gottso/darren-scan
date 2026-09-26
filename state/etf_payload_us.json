@@ -1,13 +1,13 @@
 {
   "us": {
     "market": "us",
-    "generated_at": "2026-09-19T04:41:18.036732+00:00",
+    "generated_at": "2026-09-26T05:00:12.046105+00:00",
     "benchmark_ok": true,
     "menu": [
       {
         "category": "기타",
-        "label": "A0/B2/C16",
-        "count": 18
+        "label": "A0/B1/C20",
+        "count": 21
       },
       {
         "category": "크립토",
@@ -15,28 +15,28 @@
         "count": 14
       },
       {
-        "category": "원자재/에너지",
-        "label": "A0/B1/C11",
-        "count": 12
+        "category": "국가/신흥",
+        "label": "A0/B0/C10",
+        "count": 10
       },
       {
-        "category": "귀금속",
+        "category": "원자재/에너지",
         "label": "A0/B0/C10",
         "count": 10
       },
       {
         "category": "AI/테크",
-        "label": "A0/B0/C5",
-        "count": 5
+        "label": "A0/B0/C9",
+        "count": 9
       },
       {
-        "category": "국가/신흥",
-        "label": "A0/B0/C4",
-        "count": 4
+        "category": "귀금속",
+        "label": "A0/B0/C8",
+        "count": 8
       },
       {
         "category": "바이오/헬스",
-        "label": "A0/B1/C1",
+        "label": "A0/B0/C2",
         "count": 2
       },
       {
@@ -46,379 +46,238 @@
       }
     ],
     "categories": {
-      "바이오/헬스": [
-        {
-          "ticker": "ARKG",
-          "name": "ARK Genomic Revolution ETF",
-          "tier": "B",
-          "score": 54.2,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IBB",
-          "name": "iShares Biotechnology ETF",
-          "tier": "C",
-          "score": 52.3,
-          "lev": 1.0
-        }
-      ],
-      "원자재/에너지": [
-        {
-          "ticker": "USO",
-          "name": "United States Oil Fund",
-          "tier": "B",
-          "score": 52.2,
-          "lev": 1.0
-        },
-        {
-          "ticker": "UCO",
-          "name": "ProShares Ultra Bloomberg Crude Oil",
-          "tier": "C",
-          "score": 64.6,
-          "lev": 2.0
-        },
-        {
-          "ticker": "HGER",
-          "name": "Harbor Commodity All-Weather Strategy ETF",
-          "tier": "C",
-          "score": 58.4,
-          "lev": 1.0
-        },
-        {
-          "ticker": "BCI",
-          "name": "abrdn Bloomberg All Commodity Strategy K-1 F",
-          "tier": "C",
-          "score": 56.8,
-          "lev": 1.0
-        },
-        {
-          "ticker": "BNO",
-          "name": "United States Brent Oil Fund, LP ETV",
-          "tier": "C",
-          "score": 56.6,
-          "lev": 1.0
-        },
-        {
-          "ticker": "PDBC",
-          "name": "Invesco Optimum Yield Diversified Commodity ",
-          "tier": "C",
-          "score": 55.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "XLE",
-          "name": "State Street Energy Select Sector SPDR ETF",
-          "tier": "C",
-          "score": 52.4,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IXC",
-          "name": "iShares Global Energy ETF",
-          "tier": "C",
-          "score": 48.8,
-          "lev": 1.0
-        },
-        {
-          "ticker": "XOP",
-          "name": "State Street SPDR S&P Oil & Gas Exploration ",
-          "tier": "C",
-          "score": 48.5,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IYE",
-          "name": "iShares U.S. Energy ETF",
-          "tier": "C",
-          "score": 48.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "VDE",
-          "name": "Vanguard Energy ETF",
-          "tier": "C",
-          "score": 47.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "FENY",
-          "name": "Fidelity MSCI Energy Index ETF",
-          "tier": "C",
-          "score": 41.4,
-          "lev": 1.0
-        }
-      ],
       "기타": [
         {
           "ticker": "BSOL",
           "name": "Bitwise Solana Staking ETF",
           "tier": "B",
-          "score": 51.6,
-          "lev": 1.0
-        },
-        {
-          "ticker": "BWET",
-          "name": "Breakwave Tanker Shipping ETF",
-          "tier": "B",
-          "score": 51.4,
+          "score": 43.8,
           "lev": 1.0
         },
         {
           "ticker": "PTIR",
           "name": "GraniteShares 2x Long PLTR Daily ETF",
           "tier": "C",
-          "score": 72.6,
+          "score": 67.4,
+          "lev": 2.0
+        },
+        {
+          "ticker": "MSTX",
+          "name": "Defiance Daily Target 2x Long MSTR ETF",
+          "tier": "C",
+          "score": 65.5,
+          "lev": 2.0
+        },
+        {
+          "ticker": "BWET",
+          "name": "Breakwave Tanker Shipping ETF",
+          "tier": "C",
+          "score": 64.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "BMNU",
+          "name": "T-REX 2X Long BMNR Daily Target ETF",
+          "tier": "C",
+          "score": 64.4,
           "lev": 2.0
         },
         {
           "ticker": "PLTU",
           "name": "Direxion Daily PLTR Bull 2X ETF",
           "tier": "C",
-          "score": 67.9,
-          "lev": 2.0
-        },
-        {
-          "ticker": "FNGU",
-          "name": "MicroSectors FANG+ 3X Leveraged ETNs",
-          "tier": "C",
-          "score": 64.1,
-          "lev": 3.0
-        },
-        {
-          "ticker": "NOWL",
-          "name": "GraniteShares 2x Long NOW Daily ETF",
-          "tier": "C",
           "score": 63.1,
           "lev": 2.0
         },
         {
-          "ticker": "MSFU",
-          "name": "Direxion Daily MSFT Bull 2X ETF",
+          "ticker": "DLLL",
+          "name": "GraniteShares 2x Long DELL Daily ETF",
           "tier": "C",
           "score": 61.7,
           "lev": 2.0
         },
         {
-          "ticker": "BMNU",
-          "name": "T-REX 2X Long BMNR Daily Target ETF",
+          "ticker": "NOWL",
+          "name": "GraniteShares 2x Long NOW Daily ETF",
           "tier": "C",
-          "score": 61.4,
+          "score": 60.4,
           "lev": 2.0
+        },
+        {
+          "ticker": "SMCX",
+          "name": "Defiance Daily Target 2X Long SMCI ETF",
+          "tier": "C",
+          "score": 55.6,
+          "lev": 2.0
+        },
+        {
+          "ticker": "AIA",
+          "name": "iShares Asia 50 ETF",
+          "tier": "C",
+          "score": 55.2,
+          "lev": 1.0
+        },
+        {
+          "ticker": "MSTU",
+          "name": "T-Rex 2X Long MSTR Daily Target ETF",
+          "tier": "C",
+          "score": 55.2,
+          "lev": 2.0
+        },
+        {
+          "ticker": "IGM",
+          "name": "iShares Expanded Tech Sector ETF",
+          "tier": "C",
+          "score": 53.1,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IXN",
+          "name": "iShares Global Tech ETF",
+          "tier": "C",
+          "score": 52.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "FNGU",
+          "name": "MicroSectors FANG+ 3X Leveraged ETNs",
+          "tier": "C",
+          "score": 52.3,
+          "lev": 3.0
+        },
+        {
+          "ticker": "ARTY",
+          "name": "iShares Future AI & Tech ETF",
+          "tier": "C",
+          "score": 51.8,
+          "lev": 1.0
         },
         {
           "ticker": "MGK",
           "name": "Vanguard Morningstar Mega Cap Growth ETF",
           "tier": "C",
-          "score": 59.2,
+          "score": 48.7,
           "lev": 1.0
         },
         {
           "ticker": "VGT",
           "name": "Vanguard Information Tech ETF",
           "tier": "C",
-          "score": 57.6,
+          "score": 47.1,
           "lev": 1.0
         },
         {
-          "ticker": "ILF",
-          "name": "iShares Latin America 40 ETF",
+          "ticker": "MSFU",
+          "name": "Direxion Daily MSFT Bull 2X ETF",
           "tier": "C",
-          "score": 52.1,
-          "lev": 1.0
+          "score": 44.5,
+          "lev": 2.0
         },
         {
-          "ticker": "COWZ",
-          "name": "Pacer US Cash Cows 100 ETF",
+          "ticker": "VOX",
+          "name": "Vanguard Communication Services  ETF",
           "tier": "C",
-          "score": 50.1,
-          "lev": 1.0
-        },
-        {
-          "ticker": "VFLO",
-          "name": "VictoryShares Free Cash Flow ETF",
-          "tier": "C",
-          "score": 46.7,
+          "score": 42.7,
           "lev": 1.0
         },
         {
           "ticker": "MAGS",
           "name": "Roundhill Magnificent Seven ETF",
           "tier": "C",
-          "score": 46.6,
-          "lev": 1.0
-        },
-        {
-          "ticker": "BIZD",
-          "name": "VanEck BDC Income ETF",
-          "tier": "C",
-          "score": 44.0,
+          "score": 42.5,
           "lev": 1.0
         },
         {
           "ticker": "AVDV",
           "name": "Avantis International Small Cap Value ETF",
           "tier": "C",
-          "score": 38.6,
-          "lev": 1.0
-        },
-        {
-          "ticker": "FNDF",
-          "name": "Schwab Fundamental International Equity ETF",
-          "tier": "C",
-          "score": 33.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "JIVE",
-          "name": "JPMorgan International Value ETF",
-          "tier": "C",
-          "score": 28.7,
-          "lev": 1.0
-        }
-      ],
-      "AI/테크": [
-        {
-          "ticker": "SKYY",
-          "name": "First Trust Cloud Computing ETF",
-          "tier": "C",
-          "score": 62.9,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IGV",
-          "name": "iShares Expanded Tech-Software Sector ETF",
-          "tier": "C",
-          "score": 55.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IYW",
-          "name": "iShares U.S. Technology ETF",
-          "tier": "C",
-          "score": 53.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "FTEC",
-          "name": "Fidelity MSCI Information Technology Index E",
-          "tier": "C",
-          "score": 51.1,
-          "lev": 1.0
-        },
-        {
-          "ticker": "FDN",
-          "name": "First Trust DJ Internet Index Fund",
-          "tier": "C",
-          "score": 48.0,
-          "lev": 1.0
-        }
-      ],
-      "귀금속": [
-        {
-          "ticker": "GDXU",
-          "name": "MicroSectors Gold Miners 3X Leveraged ETN",
-          "tier": "C",
-          "score": 62.3,
-          "lev": 3.0
-        },
-        {
-          "ticker": "NUGT",
-          "name": "Direxion Daily Gold Miners Index Bull 2X ETF",
-          "tier": "C",
-          "score": 60.1,
-          "lev": 2.0
-        },
-        {
-          "ticker": "RING",
-          "name": "iShares MSCI Global Gold Miners ETF",
-          "tier": "C",
-          "score": 59.9,
-          "lev": 1.0
-        },
-        {
-          "ticker": "GDX",
-          "name": "VanEck Gold Miners ETF",
-          "tier": "C",
-          "score": 58.7,
-          "lev": 1.0
-        },
-        {
-          "ticker": "PPLT",
-          "name": "abrdn Physical Platinum Shares ETF",
-          "tier": "C",
-          "score": 57.6,
-          "lev": 1.0
-        },
-        {
-          "ticker": "SIL",
-          "name": "Global X Silver Miners ETF",
-          "tier": "C",
-          "score": 55.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "JNUG",
-          "name": "Direxion Daily Junior Gold Miners Index Bull",
-          "tier": "C",
-          "score": 54.5,
-          "lev": 2.0
-        },
-        {
-          "ticker": "PSLV",
-          "name": "Sprott Physical Silver Trust ETV",
-          "tier": "C",
-          "score": 53.9,
-          "lev": 1.0
-        },
-        {
-          "ticker": "GDXJ",
-          "name": "VanEck Junior Gold Miners ETF",
-          "tier": "C",
-          "score": 53.8,
-          "lev": 1.0
-        },
-        {
-          "ticker": "SILJ",
-          "name": "Amplify Junior Silver Miners ETF",
-          "tier": "C",
-          "score": 51.1,
+          "score": 31.6,
           "lev": 1.0
         }
       ],
       "크립토": [
         {
-          "ticker": "BITX",
-          "name": "2x Bitcoin ETF",
+          "ticker": "ETHA",
+          "name": "iShares Ethereum Trust ETF",
           "tier": "C",
-          "score": 59.8,
-          "lev": 2.0
+          "score": 70.1,
+          "lev": 1.0
+        },
+        {
+          "ticker": "ETH",
+          "name": "Grayscale Ethereum Staking Mini ETF Shares",
+          "tier": "C",
+          "score": 67.2,
+          "lev": 1.0
+        },
+        {
+          "ticker": "BTC",
+          "name": "Grayscale Bitcoin Mini Trust (BTC)",
+          "tier": "C",
+          "score": 67.0,
+          "lev": 1.0
+        },
+        {
+          "ticker": "ETHE",
+          "name": "Grayscale Ethereum Staking ETF Shares",
+          "tier": "C",
+          "score": 67.0,
+          "lev": 1.0
         },
         {
           "ticker": "ETHU",
           "name": "2x Ether ETF",
           "tier": "C",
-          "score": 58.3,
+          "score": 63.9,
           "lev": 2.0
+        },
+        {
+          "ticker": "FETH",
+          "name": "Fidelity Ethereum Fund",
+          "tier": "C",
+          "score": 63.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "GBTC",
+          "name": "Grayscale Bitcoin Trust (BTC)",
+          "tier": "C",
+          "score": 63.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "ARKB",
+          "name": "ARK 21Shares Bitcoin ETF",
+          "tier": "C",
+          "score": 62.4,
+          "lev": 1.0
         },
         {
           "ticker": "IBIT",
           "name": "iShares Bitcoin Trust ETF",
           "tier": "C",
-          "score": 57.7,
+          "score": 60.7,
           "lev": 1.0
         },
         {
           "ticker": "BITB",
           "name": "Bitwise Bitcoin ETF",
           "tier": "C",
-          "score": 57.5,
+          "score": 60.6,
           "lev": 1.0
         },
         {
           "ticker": "BITU",
           "name": "ProShares Ultra Bitcoin ETF",
           "tier": "C",
-          "score": 56.8,
+          "score": 60.3,
+          "lev": 2.0
+        },
+        {
+          "ticker": "BITX",
+          "name": "2x Bitcoin ETF",
+          "tier": "C",
+          "score": 58.5,
           "lev": 2.0
         },
         {
@@ -429,177 +288,390 @@
           "lev": 1.0
         },
         {
-          "ticker": "ETH",
-          "name": "Grayscale Ethereum Staking Mini ETF Shares",
-          "tier": "C",
-          "score": 54.9,
-          "lev": 1.0
-        },
-        {
-          "ticker": "GBTC",
-          "name": "Grayscale Bitcoin Trust (BTC)",
-          "tier": "C",
-          "score": 54.9,
-          "lev": 1.0
-        },
-        {
-          "ticker": "ETHA",
-          "name": "iShares Ethereum Trust ETF",
-          "tier": "C",
-          "score": 54.8,
-          "lev": 1.0
-        },
-        {
-          "ticker": "BTC",
-          "name": "Grayscale Bitcoin Mini Trust (BTC)",
-          "tier": "C",
-          "score": 54.7,
-          "lev": 1.0
-        },
-        {
-          "ticker": "FETH",
-          "name": "Fidelity Ethereum Fund",
-          "tier": "C",
-          "score": 53.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "ETHE",
-          "name": "Grayscale Ethereum Staking ETF Shares",
-          "tier": "C",
-          "score": 52.6,
-          "lev": 1.0
-        },
-        {
-          "ticker": "ARKB",
-          "name": "ARK 21Shares Bitcoin ETF",
-          "tier": "C",
-          "score": 50.0,
-          "lev": 1.0
-        },
-        {
           "ticker": "BITO",
           "name": "ProShares Bitcoin ETF",
           "tier": "C",
-          "score": 48.8,
+          "score": 49.1,
+          "lev": 1.0
+        }
+      ],
+      "AI/테크": [
+        {
+          "ticker": "SKYY",
+          "name": "First Trust Cloud Computing ETF",
+          "tier": "C",
+          "score": 66.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IGV",
+          "name": "iShares Expanded Tech-Software Sector ETF",
+          "tier": "C",
+          "score": 62.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "AIQ",
+          "name": "Global X Artificial Intelligence & Technolog",
+          "tier": "C",
+          "score": 52.2,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IYW",
+          "name": "iShares U.S. Technology ETF",
+          "tier": "C",
+          "score": 52.0,
+          "lev": 1.0
+        },
+        {
+          "ticker": "XLK",
+          "name": "State Street Technology Select Sector SPDR E",
+          "tier": "C",
+          "score": 51.9,
+          "lev": 1.0
+        },
+        {
+          "ticker": "FDN",
+          "name": "First Trust DJ Internet Index Fund",
+          "tier": "C",
+          "score": 51.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "FTEC",
+          "name": "Fidelity MSCI Information Technology Index E",
+          "tier": "C",
+          "score": 46.9,
+          "lev": 1.0
+        },
+        {
+          "ticker": "RSPT",
+          "name": "Invesco S&P 500 Equal Weight Technology ETF",
+          "tier": "C",
+          "score": 46.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "ARKK",
+          "name": "ARK Innovation ETF",
+          "tier": "C",
+          "score": 42.7,
+          "lev": 1.0
+        }
+      ],
+      "귀금속": [
+        {
+          "ticker": "RING",
+          "name": "iShares MSCI Global Gold Miners ETF",
+          "tier": "C",
+          "score": 65.9,
+          "lev": 1.0
+        },
+        {
+          "ticker": "NUGT",
+          "name": "Direxion Daily Gold Miners Index Bull 2X ETF",
+          "tier": "C",
+          "score": 62.4,
+          "lev": 2.0
+        },
+        {
+          "ticker": "GDX",
+          "name": "VanEck Gold Miners ETF",
+          "tier": "C",
+          "score": 61.5,
+          "lev": 1.0
+        },
+        {
+          "ticker": "GDXJ",
+          "name": "VanEck Junior Gold Miners ETF",
+          "tier": "C",
+          "score": 59.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "JNUG",
+          "name": "Direxion Daily Junior Gold Miners Index Bull",
+          "tier": "C",
+          "score": 59.2,
+          "lev": 2.0
+        },
+        {
+          "ticker": "PPLT",
+          "name": "abrdn Physical Platinum Shares ETF",
+          "tier": "C",
+          "score": 58.9,
+          "lev": 1.0
+        },
+        {
+          "ticker": "SIL",
+          "name": "Global X Silver Miners ETF",
+          "tier": "C",
+          "score": 55.9,
+          "lev": 1.0
+        },
+        {
+          "ticker": "SILJ",
+          "name": "Amplify Junior Silver Miners ETF",
+          "tier": "C",
+          "score": 53.4,
+          "lev": 1.0
+        }
+      ],
+      "원자재/에너지": [
+        {
+          "ticker": "UCO",
+          "name": "ProShares Ultra Bloomberg Crude Oil",
+          "tier": "C",
+          "score": 55.1,
+          "lev": 2.0
+        },
+        {
+          "ticker": "GSG",
+          "name": "iShares GSCI Commodity-Indexed Trust Fund",
+          "tier": "C",
+          "score": 54.1,
+          "lev": 1.0
+        },
+        {
+          "ticker": "BNO",
+          "name": "United States Brent Oil Fund, LP ETV",
+          "tier": "C",
+          "score": 53.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "USO",
+          "name": "United States Oil Fund",
+          "tier": "C",
+          "score": 48.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "BCI",
+          "name": "abrdn Bloomberg All Commodity Strategy K-1 F",
+          "tier": "C",
+          "score": 47.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "PDBC",
+          "name": "Invesco Optimum Yield Diversified Commodity ",
+          "tier": "C",
+          "score": 47.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "XLE",
+          "name": "State Street Energy Select Sector SPDR ETF",
+          "tier": "C",
+          "score": 47.2,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IYE",
+          "name": "iShares U.S. Energy ETF",
+          "tier": "C",
+          "score": 47.0,
+          "lev": 1.0
+        },
+        {
+          "ticker": "HGER",
+          "name": "Harbor Commodity All-Weather Strategy ETF",
+          "tier": "C",
+          "score": 41.4,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IXC",
+          "name": "iShares Global Energy ETF",
+          "tier": "C",
+          "score": 32.4,
           "lev": 1.0
         }
       ],
       "국가/신흥": [
         {
+          "ticker": "FLTW",
+          "name": "Franklin FTSE Taiwan ETF",
+          "tier": "C",
+          "score": 50.9,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IEMG",
+          "name": "iShares Core MSCI Emerging Markets ETF",
+          "tier": "C",
+          "score": 47.1,
+          "lev": 1.0
+        },
+        {
+          "ticker": "VPL",
+          "name": "Vanguard FTSE Pacific ETF",
+          "tier": "C",
+          "score": 45.6,
+          "lev": 1.0
+        },
+        {
           "ticker": "FNDE",
           "name": "Schwab Fundamental Emerging Markets Equity E",
           "tier": "C",
-          "score": 53.1,
+          "score": 43.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "EWT",
+          "name": "iShares MSCI Taiwan ETF",
+          "tier": "C",
+          "score": 40.1,
+          "lev": 1.0
+        },
+        {
+          "ticker": "DFAE",
+          "name": "Dimensional Emerging Core Equity Market ETF",
+          "tier": "C",
+          "score": 39.5,
+          "lev": 1.0
+        },
+        {
+          "ticker": "DFEM",
+          "name": "Dimensional Emerging Markets Core Equity 2 E",
+          "tier": "C",
+          "score": 39.5,
           "lev": 1.0
         },
         {
           "ticker": "BBJP",
           "name": "JPMorgan BetaBuilders Japan ETF",
           "tier": "C",
-          "score": 42.4,
+          "score": 37.5,
           "lev": 1.0
         },
         {
           "ticker": "EWJ",
           "name": "iShares MSCI Japan Index Fund",
           "tier": "C",
-          "score": 39.6,
+          "score": 35.1,
           "lev": 1.0
         },
         {
           "ticker": "FLJP",
           "name": "Franklin FTSE Japan ETF",
           "tier": "C",
-          "score": 30.7,
+          "score": 32.7,
           "lev": 1.0
         }
       ],
       "지수/광범위": [
         {
-          "ticker": "XLG",
-          "name": "Invesco S&P 500 Top 50 ETF",
+          "ticker": "ESGE",
+          "name": "iShares ESG Aware MSCI EM ETF",
           "tier": "C",
-          "score": 46.2,
+          "score": 50.6,
           "lev": 1.0
         },
         {
-          "ticker": "IVLU",
-          "name": "iShares MSCI Intl Value Factor ETF",
+          "ticker": "XLG",
+          "name": "Invesco S&P 500 Top 50 ETF",
           "tier": "C",
-          "score": 26.6,
+          "score": 50.3,
+          "lev": 1.0
+        }
+      ],
+      "바이오/헬스": [
+        {
+          "ticker": "IBB",
+          "name": "iShares Biotechnology ETF",
+          "tier": "C",
+          "score": 50.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "ARKG",
+          "name": "ARK Genomic Revolution ETF",
+          "tier": "C",
+          "score": 41.8,
           "lev": 1.0
         }
       ]
     },
     "tickers": [
-      "ARKG",
-      "USO",
       "BSOL",
-      "BWET",
-      "PTIR",
-      "PLTU",
-      "UCO",
-      "FNGU",
-      "NOWL",
-      "SKYY",
-      "GDXU",
-      "MSFU",
-      "BMNU",
-      "NUGT",
-      "RING",
-      "BITX",
-      "MGK",
-      "GDX",
-      "HGER",
-      "ETHU",
-      "IBIT",
-      "PPLT",
-      "VGT",
-      "BITB",
-      "BCI",
-      "BITU",
-      "BNO",
-      "FBTC",
-      "IGV",
-      "PDBC",
-      "SIL",
-      "ETH",
-      "GBTC",
       "ETHA",
+      "PTIR",
+      "ETH",
       "BTC",
-      "JNUG",
-      "PSLV",
-      "GDXJ",
-      "FNDE",
-      "FETH",
-      "IYW",
       "ETHE",
-      "XLE",
-      "IBB",
-      "ILF",
-      "FTEC",
-      "SILJ",
-      "COWZ",
+      "SKYY",
+      "RING",
+      "MSTX",
+      "BWET",
+      "BMNU",
+      "ETHU",
+      "FETH",
+      "GBTC",
+      "PLTU",
+      "IGV",
       "ARKB",
-      "BITO",
-      "IXC",
-      "XOP",
-      "IYE",
+      "NUGT",
+      "DLLL",
+      "GDX",
+      "IBIT",
+      "BITB",
+      "NOWL",
+      "BITU",
+      "GDXJ",
+      "JNUG",
+      "PPLT",
+      "BITX",
+      "SIL",
+      "SMCX",
+      "FBTC",
+      "AIA",
+      "MSTU",
+      "UCO",
+      "GSG",
+      "BNO",
+      "SILJ",
+      "IGM",
+      "IXN",
+      "FNGU",
+      "AIQ",
+      "IYW",
+      "XLK",
+      "ARTY",
       "FDN",
-      "VDE",
-      "VFLO",
-      "MAGS",
+      "FLTW",
+      "ESGE",
+      "IBB",
       "XLG",
-      "BIZD",
+      "BITO",
+      "MGK",
+      "USO",
+      "BCI",
+      "PDBC",
+      "XLE",
+      "IEMG",
+      "VGT",
+      "IYE",
+      "FTEC",
+      "RSPT",
+      "VPL",
+      "MSFU",
+      "FNDE",
+      "ARKK",
+      "VOX",
+      "MAGS",
+      "ARKG",
+      "HGER",
+      "EWT",
+      "DFAE",
+      "DFEM",
       "BBJP",
-      "FENY",
       "EWJ",
-      "AVDV",
-      "FNDF",
       "FLJP",
-      "JIVE",
-      "IVLU"
+      "IXC",
+      "AVDV"
     ]
   }
 }
