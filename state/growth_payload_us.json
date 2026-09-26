@@ -1,6 +1,78 @@
 {
   "market": "us",
   "date": "2026-09-26",
-  "total": 0,
-  "sectors": []
+  "total": 21,
+  "sectors": [
+    {
+      "name": "Technology",
+      "tickers": [
+        "SMTC",
+        "NTSK",
+        "RBRK",
+        "SNDK",
+        "PANW",
+        "NTAP",
+        "TEAM",
+        "SNOW",
+        "SNX"
+      ]
+    },
+    {
+      "name": "Financial Services",
+      "tickers": [
+        "SBET"
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "tickers": [
+        "STLN"
+      ]
+    },
+    {
+      "name": "미분류",
+      "tickers": [
+        "LITE",
+        "IBRX",
+        "HTFL"
+      ]
+    },
+    {
+      "name": "Energy",
+      "tickers": [
+        "SEI"
+      ]
+    },
+    {
+      "name": "Communication Services",
+      "tickers": [
+        "RBLX"
+      ]
+    },
+    {
+      "name": "Industrials",
+      "tickers": [
+        "TH",
+        "SPCX"
+      ]
+    },
+    {
+      "name": "Basic Materials",
+      "tickers": [
+        "SCCO"
+      ]
+    },
+    {
+      "name": "Consumer Cyclical",
+      "tickers": [
+        "TSLA"
+      ]
+    },
+    {
+      "name": "Consumer Defensive",
+      "tickers": [
+        "TAL"
+      ]
+    }
+  ]
 }
