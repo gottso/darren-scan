@@ -1,89 +1,89 @@
 {
   "market": "kr",
-  "date": "2026-10-03",
+  "date": "2026-10-10",
   "total": 38,
   "sectors": [
     {
       "name": "Technology",
       "tickers": [
         "446540.KQ",
-        "000500.KS",
+        "456010.KQ",
+        "388790.KQ",
+        "440110.KQ",
         "203650.KQ",
         "319660.KQ",
+        "425420.KQ",
         "389500.KQ",
-        "332570.KQ",
-        "024840.KQ",
-        "007660.KS",
-        "144960.KQ",
-        "402340.KS",
-        "000660.KS",
+        "039030.KQ",
+        "042700.KS",
+        "005935.KS",
         "005930.KS"
-      ]
-    },
-    {
-      "name": "Consumer Defensive",
-      "tickers": [
-        "003350.KS",
-        "192820.KS"
-      ]
-    },
-    {
-      "name": "Consumer Cyclical",
-      "tickers": [
-        "396300.KQ",
-        "007340.KS",
-        "065350.KQ"
-      ]
-    },
-    {
-      "name": "Industrials",
-      "tickers": [
-        "126730.KQ",
-        "274090.KQ",
-        "229640.KS",
-        "122640.KQ",
-        "001440.KS",
-        "090360.KQ",
-        "034730.KS",
-        "454910.KS",
-        "010120.KS"
       ]
     },
     {
       "name": "미분류",
       "tickers": [
-        "131290.KQ",
+        "219130.KQ",
+        "032580.KQ",
         "098120.KQ",
         "064760.KQ",
-        "095340.KQ",
-        "027360.KQ",
-        "060370.KQ",
-        "039200.KQ"
-      ]
-    },
-    {
-      "name": "Energy",
-      "tickers": [
-        "096770.KS"
-      ]
-    },
-    {
-      "name": "Financial Services",
-      "tickers": [
-        "289080.KQ",
-        "138930.KS"
+        "095610.KQ",
+        "189300.KQ",
+        "059120.KQ",
+        "060370.KQ"
       ]
     },
     {
       "name": "Basic Materials",
       "tickers": [
-        "125020.KQ"
+        "093370.KS",
+        "170920.KQ",
+        "357780.KQ"
+      ]
+    },
+    {
+      "name": "Consumer Defensive",
+      "tickers": [
+        "265740.KQ"
+      ]
+    },
+    {
+      "name": "Industrials",
+      "tickers": [
+        "272210.KS",
+        "122640.KQ",
+        "066970.KS",
+        "062040.KS",
+        "028670.KS",
+        "090360.KQ",
+        "010120.KS",
+        "454910.KS"
+      ]
+    },
+    {
+      "name": "Energy",
+      "tickers": [
+        "010950.KS"
+      ]
+    },
+    {
+      "name": "Financial Services",
+      "tickers": [
+        "289080.KQ"
       ]
     },
     {
       "name": "Healthcare",
       "tickers": [
-        "128940.KS"
+        "458870.KQ",
+        "128940.KS",
+        "476060.KQ"
+      ]
+    },
+    {
+      "name": "Consumer Cyclical",
+      "tickers": [
+        "007340.KS"
       ]
     }
   ]
