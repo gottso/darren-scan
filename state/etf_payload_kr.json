@@ -1,28 +1,59 @@
 {
   "kr": {
     "market": "kr",
-    "generated_at": "2026-10-03T01:56:04.696091+00:00",
+    "generated_at": "2026-10-10T02:18:50.473773+00:00",
     "benchmark_ok": true,
     "menu": [
       {
-        "category": "기타",
-        "label": "A0/B0/C1",
-        "count": 1
+        "category": "2차전지",
+        "label": "A0/B0/C2",
+        "count": 2
+      },
+      {
+        "category": "반도체",
+        "label": "A0/B2/C0",
+        "count": 2
       }
     ],
     "categories": {
-      "기타": [
+      "반도체": [
         {
-          "ticker": "117700.KS",
-          "name": "KODEX 건설",
+          "ticker": "455850.KS",
+          "name": "SOL AI반도체소부장",
+          "tier": "B",
+          "score": 61.0,
+          "lev": 1.0
+        },
+        {
+          "ticker": "471990.KS",
+          "name": "KODEX AI반도체핵심장비",
+          "tier": "B",
+          "score": 50.8,
+          "lev": 1.0
+        }
+      ],
+      "2차전지": [
+        {
+          "ticker": "364980.KS",
+          "name": "TIGER 2차전지TOP10",
           "tier": "C",
-          "score": 90.7,
+          "score": 67.4,
+          "lev": 1.0
+        },
+        {
+          "ticker": "305720.KS",
+          "name": "KODEX 2차전지산업",
+          "tier": "C",
+          "score": 64.0,
           "lev": 1.0
         }
       ]
     },
     "tickers": [
-      "117700.KS"
+      "455850.KS",
+      "471990.KS",
+      "364980.KS",
+      "305720.KS"
     ]
   }
 }
