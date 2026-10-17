@@ -1,7 +1,7 @@
 {
   "market": "kr",
-  "date": "2026-10-16",
-  "total": 11,
+  "date": "2026-10-17",
+  "total": 14,
   "sectors": [
     {
       "name": "미분류",
@@ -9,7 +9,7 @@
         "078350.KQ",
         "092870.KQ",
         "085910.KQ",
-        "419050.KQ",
+        "131290.KQ",
         "039200.KQ"
       ]
     },
@@ -17,7 +17,9 @@
       "name": "Technology",
       "tickers": [
         "046970.KQ",
-        "080580.KQ"
+        "080580.KQ",
+        "003160.KS",
+        "178320.KQ"
       ]
     },
     {
@@ -27,16 +29,17 @@
       ]
     },
     {
+      "name": "Industrials",
+      "tickers": [
+        "272210.KS",
+        "373220.KS"
+      ]
+    },
+    {
       "name": "Consumer Defensive",
       "tickers": [
         "265740.KQ",
         "192820.KS"
-      ]
-    },
-    {
-      "name": "Industrials",
-      "tickers": [
-        "373220.KS"
       ]
     }
   ]
