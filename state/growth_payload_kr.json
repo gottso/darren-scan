@@ -1,6 +1,32 @@
 {
   "market": "kr",
-  "date": "2026-10-24",
-  "total": 0,
-  "sectors": []
+  "date": "2026-10-27",
+  "total": 5,
+  "sectors": [
+    {
+      "name": "Consumer Cyclical",
+      "tickers": [
+        "396300.KQ"
+      ]
+    },
+    {
+      "name": "미분류",
+      "tickers": [
+        "419050.KQ"
+      ]
+    },
+    {
+      "name": "Industrials",
+      "tickers": [
+        "091580.KQ",
+        "011200.KS"
+      ]
+    },
+    {
+      "name": "Communication Services",
+      "tickers": [
+        "263750.KQ"
+      ]
+    }
+  ]
 }
