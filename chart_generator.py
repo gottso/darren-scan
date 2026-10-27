@@ -31,7 +31,9 @@ import requests
 TICKER_RAW = os.environ.get("TICKER", "").strip().upper()
 MARKET = os.environ.get("MARKET", "US").strip().upper()
 TG_TOKEN = os.environ.get("DARREN_TG_TOKEN", "")
-TG_CHAT = os.environ.get("DARREN_TG_CHAT", "")
+# 요청자에게 결과를 보낸다. CHAT_ID(워크플로우 입력)가 우선이고,
+# 없으면 기존처럼 소유자 채팅(DARREN_TG_CHAT)으로 간다.
+TG_CHAT = os.environ.get("CHAT_ID", "").strip() or os.environ.get("DARREN_TG_CHAT", "")
 
 
 def send_telegram_text(text):
