@@ -1,31 +1,21 @@
 {
   "us": {
     "market": "us",
-    "generated_at": "2026-10-24T04:36:50.754576+00:00",
+    "generated_at": "2026-10-31T05:38:06.430055+00:00",
     "benchmark_ok": true,
     "menu": [
       {
         "category": "원자재/에너지",
-        "label": "A0/B3/C12",
-        "count": 15
-      },
-      {
-        "category": "크립토",
-        "label": "A0/B0/C9",
-        "count": 9
+        "label": "A0/B3/C9",
+        "count": 12
       },
       {
         "category": "기타",
-        "label": "A0/B1/C7",
-        "count": 8
+        "label": "A0/B0/C4",
+        "count": 4
       },
       {
         "category": "AI/테크",
-        "label": "A0/B0/C1",
-        "count": 1
-      },
-      {
-        "category": "국가/신흥",
         "label": "A0/B0/C1",
         "count": 1
       }
@@ -36,229 +26,115 @@
           "ticker": "BNO",
           "name": "United States Brent Oil Fund, LP ETV",
           "tier": "B",
-          "score": 50.9,
+          "score": 63.1,
           "lev": 1.0
         },
         {
           "ticker": "USO",
           "name": "United States Oil Fund",
           "tier": "B",
-          "score": 47.0,
+          "score": 61.0,
           "lev": 1.0
         },
         {
           "ticker": "UCO",
           "name": "ProShares Ultra Bloomberg Crude Oil",
           "tier": "B",
-          "score": 45.3,
+          "score": 54.0,
           "lev": 2.0
-        },
-        {
-          "ticker": "BCI",
-          "name": "abrdn Bloomberg All Commodity Strategy K-1 F",
-          "tier": "C",
-          "score": 57.7,
-          "lev": 1.0
         },
         {
           "ticker": "GSG",
           "name": "iShares GSCI Commodity-Indexed Trust Fund",
           "tier": "C",
-          "score": 57.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "CRAK",
-          "name": "VanEck Oil Refiners ETF",
-          "tier": "C",
-          "score": 53.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "PDBC",
-          "name": "Invesco Optimum Yield Diversified Commodity ",
-          "tier": "C",
-          "score": 50.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "HGER",
-          "name": "Harbor Commodity All-Weather Strategy ETF",
-          "tier": "C",
-          "score": 49.7,
-          "lev": 1.0
-        },
-        {
-          "ticker": "XOP",
-          "name": "State Street SPDR S&P Oil & Gas Exploration ",
-          "tier": "C",
-          "score": 41.7,
+          "score": 78.8,
           "lev": 1.0
         },
         {
           "ticker": "XLE",
           "name": "State Street Energy Select Sector SPDR ETF",
           "tier": "C",
-          "score": 37.2,
+          "score": 54.3,
           "lev": 1.0
         },
         {
-          "ticker": "IYE",
-          "name": "iShares U.S. Energy ETF",
+          "ticker": "IXC",
+          "name": "iShares Global Energy ETF",
           "tier": "C",
-          "score": 35.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "VDE",
-          "name": "Vanguard Energy ETF",
-          "tier": "C",
-          "score": 35.1,
+          "score": 52.5,
           "lev": 1.0
         },
         {
           "ticker": "FENY",
           "name": "Fidelity MSCI Energy Index ETF",
           "tier": "C",
-          "score": 34.8,
+          "score": 52.2,
           "lev": 1.0
         },
         {
           "ticker": "ERX",
           "name": "Direxion Energy Bull 2X ETF",
           "tier": "C",
-          "score": 34.6,
+          "score": 51.9,
           "lev": 2.0
         },
         {
-          "ticker": "IXC",
-          "name": "iShares Global Energy ETF",
+          "ticker": "PDBC",
+          "name": "Invesco Optimum Yield Diversified Commodity ",
           "tier": "C",
-          "score": 31.1,
+          "score": 51.1,
+          "lev": 1.0
+        },
+        {
+          "ticker": "VDE",
+          "name": "Vanguard Energy ETF",
+          "tier": "C",
+          "score": 49.9,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IYE",
+          "name": "iShares U.S. Energy ETF",
+          "tier": "C",
+          "score": 48.8,
+          "lev": 1.0
+        },
+        {
+          "ticker": "XOP",
+          "name": "State Street SPDR S&P Oil & Gas Exploration ",
+          "tier": "C",
+          "score": 48.8,
           "lev": 1.0
         }
       ],
       "기타": [
         {
-          "ticker": "NOWL",
-          "name": "GraniteShares 2x Long NOW Daily ETF",
-          "tier": "B",
-          "score": 48.7,
-          "lev": 2.0
-        },
-        {
           "ticker": "BWET",
           "name": "Breakwave Tanker Shipping ETF",
           "tier": "C",
-          "score": 72.6,
+          "score": 76.8,
           "lev": 1.0
-        },
-        {
-          "ticker": "MSFU",
-          "name": "Direxion Daily MSFT Bull 2X ETF",
-          "tier": "C",
-          "score": 58.2,
-          "lev": 2.0
-        },
-        {
-          "ticker": "PTIR",
-          "name": "GraniteShares 2x Long PLTR Daily ETF",
-          "tier": "C",
-          "score": 57.9,
-          "lev": 2.0
         },
         {
           "ticker": "MRNX",
           "name": "Defiance Daily Target 2X Long MRNA ETF",
           "tier": "C",
-          "score": 53.2,
+          "score": 63.6,
           "lev": 2.0
         },
         {
           "ticker": "AAPU",
           "name": "Direxion Daily AAPL Bull 2X ETF",
           "tier": "C",
-          "score": 53.1,
+          "score": 48.2,
           "lev": 2.0
         },
         {
-          "ticker": "PLTU",
-          "name": "Direxion Daily PLTR Bull 2X ETF",
+          "ticker": "MSFU",
+          "name": "Direxion Daily MSFT Bull 2X ETF",
           "tier": "C",
-          "score": 51.0,
+          "score": 20.0,
           "lev": 2.0
-        },
-        {
-          "ticker": "ILF",
-          "name": "iShares Latin America 40 ETF",
-          "tier": "C",
-          "score": 49.3,
-          "lev": 1.0
-        }
-      ],
-      "크립토": [
-        {
-          "ticker": "BTC",
-          "name": "Grayscale Bitcoin Mini Trust (BTC)",
-          "tier": "C",
-          "score": 62.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "ARKB",
-          "name": "ARK 21Shares Bitcoin ETF",
-          "tier": "C",
-          "score": 60.5,
-          "lev": 1.0
-        },
-        {
-          "ticker": "BITO",
-          "name": "ProShares Bitcoin ETF",
-          "tier": "C",
-          "score": 59.7,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IBIT",
-          "name": "iShares Bitcoin Trust ETF",
-          "tier": "C",
-          "score": 58.4,
-          "lev": 1.0
-        },
-        {
-          "ticker": "BITX",
-          "name": "2x Bitcoin ETF",
-          "tier": "C",
-          "score": 56.2,
-          "lev": 2.0
-        },
-        {
-          "ticker": "GBTC",
-          "name": "Grayscale Bitcoin Trust (BTC)",
-          "tier": "C",
-          "score": 56.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "BITU",
-          "name": "ProShares Ultra Bitcoin ETF",
-          "tier": "C",
-          "score": 55.4,
-          "lev": 2.0
-        },
-        {
-          "ticker": "BITB",
-          "name": "Bitwise Bitcoin ETF",
-          "tier": "C",
-          "score": 54.8,
-          "lev": 1.0
-        },
-        {
-          "ticker": "FBTC",
-          "name": "Fidelity Wise Origin Bitcoin Fund",
-          "tier": "C",
-          "score": 52.5,
-          "lev": 1.0
         }
       ],
       "AI/테크": [
@@ -266,55 +142,29 @@
           "ticker": "BUG",
           "name": "Global X Cybersecurity ETF",
           "tier": "C",
-          "score": 59.1,
-          "lev": 1.0
-        }
-      ],
-      "국가/신흥": [
-        {
-          "ticker": "EWZ",
-          "name": "iShares MSCI Brazil ETF",
-          "tier": "C",
-          "score": 56.1,
+          "score": 55.4,
           "lev": 1.0
         }
       ]
     },
     "tickers": [
       "BNO",
-      "NOWL",
       "USO",
       "UCO",
-      "BWET",
-      "BTC",
-      "ARKB",
-      "BITO",
-      "BUG",
-      "IBIT",
-      "MSFU",
-      "PTIR",
-      "BCI",
       "GSG",
-      "BITX",
-      "EWZ",
-      "GBTC",
-      "BITU",
-      "BITB",
-      "CRAK",
+      "BWET",
       "MRNX",
-      "AAPU",
-      "FBTC",
-      "PLTU",
-      "PDBC",
-      "HGER",
-      "ILF",
-      "XOP",
+      "BUG",
       "XLE",
-      "IYE",
-      "VDE",
+      "IXC",
       "FENY",
       "ERX",
-      "IXC"
+      "PDBC",
+      "VDE",
+      "IYE",
+      "XOP",
+      "AAPU",
+      "MSFU"
     ]
   }
 }
