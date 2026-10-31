@@ -1,6 +1,85 @@
 {
   "market": "us",
-  "date": "2026-10-27",
-  "total": 0,
-  "sectors": []
+  "date": "2026-10-31",
+  "total": 33,
+  "sectors": [
+    {
+      "name": "Technology",
+      "tickers": [
+        "BSP",
+        "NTSK",
+        "RBRK",
+        "KVYO",
+        "NAVN",
+        "MCHP",
+        "FLYW",
+        "YOU",
+        "BRZE"
+      ]
+    },
+    {
+      "name": "Financial Services",
+      "tickers": [
+        "LIFE",
+        "SLDE"
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "tickers": [
+        "HTFL",
+        "STLN",
+        "NTRA",
+        "HNGE",
+        "LFST"
+      ]
+    },
+    {
+      "name": "Energy",
+      "tickers": [
+        "DHT",
+        "GRNT",
+        "TALO",
+        "BTE",
+        "MUR",
+        "EGY",
+        "SM",
+        "EC",
+        "CVE",
+        "MTDR"
+      ]
+    },
+    {
+      "name": "미분류",
+      "tickers": [
+        "LION"
+      ]
+    },
+    {
+      "name": "Industrials",
+      "tickers": [
+        "TIC",
+        "HAFN"
+      ]
+    },
+    {
+      "name": "Consumer Cyclical",
+      "tickers": [
+        "GLBE",
+        "DKS"
+      ]
+    },
+    {
+      "name": "Consumer Defensive",
+      "tickers": [
+        "ELF"
+      ]
+    },
+    {
+      "name": "Basic Materials",
+      "tickers": [
+        "STLD"
+      ]
+    }
+  ]
 }
