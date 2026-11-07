@@ -1,170 +1,28 @@
 {
   "us": {
     "market": "us",
-    "generated_at": "2026-10-31T05:38:06.430055+00:00",
+    "generated_at": "2026-11-07T05:57:07.480165+00:00",
     "benchmark_ok": true,
     "menu": [
       {
-        "category": "원자재/에너지",
-        "label": "A0/B3/C9",
-        "count": 12
-      },
-      {
         "category": "기타",
-        "label": "A0/B0/C4",
-        "count": 4
-      },
-      {
-        "category": "AI/테크",
         "label": "A0/B0/C1",
         "count": 1
       }
     ],
     "categories": {
-      "원자재/에너지": [
-        {
-          "ticker": "BNO",
-          "name": "United States Brent Oil Fund, LP ETV",
-          "tier": "B",
-          "score": 63.1,
-          "lev": 1.0
-        },
-        {
-          "ticker": "USO",
-          "name": "United States Oil Fund",
-          "tier": "B",
-          "score": 61.0,
-          "lev": 1.0
-        },
-        {
-          "ticker": "UCO",
-          "name": "ProShares Ultra Bloomberg Crude Oil",
-          "tier": "B",
-          "score": 54.0,
-          "lev": 2.0
-        },
-        {
-          "ticker": "GSG",
-          "name": "iShares GSCI Commodity-Indexed Trust Fund",
-          "tier": "C",
-          "score": 78.8,
-          "lev": 1.0
-        },
-        {
-          "ticker": "XLE",
-          "name": "State Street Energy Select Sector SPDR ETF",
-          "tier": "C",
-          "score": 54.3,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IXC",
-          "name": "iShares Global Energy ETF",
-          "tier": "C",
-          "score": 52.5,
-          "lev": 1.0
-        },
-        {
-          "ticker": "FENY",
-          "name": "Fidelity MSCI Energy Index ETF",
-          "tier": "C",
-          "score": 52.2,
-          "lev": 1.0
-        },
-        {
-          "ticker": "ERX",
-          "name": "Direxion Energy Bull 2X ETF",
-          "tier": "C",
-          "score": 51.9,
-          "lev": 2.0
-        },
-        {
-          "ticker": "PDBC",
-          "name": "Invesco Optimum Yield Diversified Commodity ",
-          "tier": "C",
-          "score": 51.1,
-          "lev": 1.0
-        },
-        {
-          "ticker": "VDE",
-          "name": "Vanguard Energy ETF",
-          "tier": "C",
-          "score": 49.9,
-          "lev": 1.0
-        },
-        {
-          "ticker": "IYE",
-          "name": "iShares U.S. Energy ETF",
-          "tier": "C",
-          "score": 48.8,
-          "lev": 1.0
-        },
-        {
-          "ticker": "XOP",
-          "name": "State Street SPDR S&P Oil & Gas Exploration ",
-          "tier": "C",
-          "score": 48.8,
-          "lev": 1.0
-        }
-      ],
       "기타": [
-        {
-          "ticker": "BWET",
-          "name": "Breakwave Tanker Shipping ETF",
-          "tier": "C",
-          "score": 76.8,
-          "lev": 1.0
-        },
         {
           "ticker": "MRNX",
           "name": "Defiance Daily Target 2X Long MRNA ETF",
           "tier": "C",
-          "score": 63.6,
+          "score": 97.6,
           "lev": 2.0
-        },
-        {
-          "ticker": "AAPU",
-          "name": "Direxion Daily AAPL Bull 2X ETF",
-          "tier": "C",
-          "score": 48.2,
-          "lev": 2.0
-        },
-        {
-          "ticker": "MSFU",
-          "name": "Direxion Daily MSFT Bull 2X ETF",
-          "tier": "C",
-          "score": 20.0,
-          "lev": 2.0
-        }
-      ],
-      "AI/테크": [
-        {
-          "ticker": "BUG",
-          "name": "Global X Cybersecurity ETF",
-          "tier": "C",
-          "score": 55.4,
-          "lev": 1.0
         }
       ]
     },
     "tickers": [
-      "BNO",
-      "USO",
-      "UCO",
-      "GSG",
-      "BWET",
-      "MRNX",
-      "BUG",
-      "XLE",
-      "IXC",
-      "FENY",
-      "ERX",
-      "PDBC",
-      "VDE",
-      "IYE",
-      "XOP",
-      "AAPU",
-      "MSFU"
+      "MRNX"
     ]
   }
 }
