@@ -1,2 +1,1 @@
-﻿ticker,name,yf_sector,industry,close,adr,week_perf,rev_growth,market_cap,avg_vol60,natr50
-383310.KQ,에코프로에이치엔,Industrials,Pollution & Treatment Controls,23350.0,7.596571360460347,-1.0593220338983023,0.321,489516269568,41.58176600833333,7.789954761430246
+﻿ticker,close,avg_vol60,today_vol,adr,week_perf,ema10,sma20,sma50,natr50,name,sector,market_cap,rev_growth,industry,yf_sector,fund_ok,cap_ok,growth_ok,excluded_industry

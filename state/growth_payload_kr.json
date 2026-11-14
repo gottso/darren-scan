@@ -1,13 +1,6 @@
 {
   "market": "kr",
-  "date": "2026-11-07",
-  "total": 1,
-  "sectors": [
-    {
-      "name": "Industrials",
-      "tickers": [
-        "383310.KQ"
-      ]
-    }
-  ]
+  "date": "2026-11-14",
+  "total": 0,
+  "sectors": []
 }
