@@ -1,9 +1,14 @@
 {
   "us": {
     "market": "us",
-    "generated_at": "2026-11-07T05:57:07.480165+00:00",
+    "generated_at": "2026-11-14T06:16:31.517022+00:00",
     "benchmark_ok": true,
     "menu": [
+      {
+        "category": "바이오/헬스",
+        "label": "A0/B0/C2",
+        "count": 2
+      },
       {
         "category": "기타",
         "label": "A0/B0/C1",
@@ -11,17 +16,35 @@
       }
     ],
     "categories": {
+      "바이오/헬스": [
+        {
+          "ticker": "XLV",
+          "name": "State Street Health Care Select Sector SPDR ",
+          "tier": "C",
+          "score": 70.6,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IYH",
+          "name": "iShares U.S. Healthcare ETF",
+          "tier": "C",
+          "score": 70.3,
+          "lev": 1.0
+        }
+      ],
       "기타": [
         {
           "ticker": "MRNX",
           "name": "Defiance Daily Target 2X Long MRNA ETF",
           "tier": "C",
-          "score": 97.6,
+          "score": 59.4,
           "lev": 2.0
         }
       ]
     },
     "tickers": [
+      "XLV",
+      "IYH",
       "MRNX"
     ]
   }
