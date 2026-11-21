@@ -1,51 +1,51 @@
 {
   "us": {
     "market": "us",
-    "generated_at": "2026-11-14T06:16:31.517022+00:00",
+    "generated_at": "2026-11-21T07:03:03.932676+00:00",
     "benchmark_ok": true,
     "menu": [
       {
-        "category": "바이오/헬스",
+        "category": "기타",
         "label": "A0/B0/C2",
         "count": 2
       },
       {
-        "category": "기타",
+        "category": "바이오/헬스",
         "label": "A0/B0/C1",
         "count": 1
       }
     ],
     "categories": {
+      "기타": [
+        {
+          "ticker": "VDC",
+          "name": "Vanguard Consumer Staples ETF",
+          "tier": "C",
+          "score": 81.3,
+          "lev": 1.0
+        },
+        {
+          "ticker": "IYK",
+          "name": "iShares U.S. Consumer Staples ETF",
+          "tier": "C",
+          "score": 56.6,
+          "lev": 1.0
+        }
+      ],
       "바이오/헬스": [
         {
           "ticker": "XLV",
           "name": "State Street Health Care Select Sector SPDR ",
           "tier": "C",
-          "score": 70.6,
+          "score": 54.1,
           "lev": 1.0
-        },
-        {
-          "ticker": "IYH",
-          "name": "iShares U.S. Healthcare ETF",
-          "tier": "C",
-          "score": 70.3,
-          "lev": 1.0
-        }
-      ],
-      "기타": [
-        {
-          "ticker": "MRNX",
-          "name": "Defiance Daily Target 2X Long MRNA ETF",
-          "tier": "C",
-          "score": 59.4,
-          "lev": 2.0
         }
       ]
     },
     "tickers": [
-      "XLV",
-      "IYH",
-      "MRNX"
+      "VDC",
+      "IYK",
+      "XLV"
     ]
   }
 }
