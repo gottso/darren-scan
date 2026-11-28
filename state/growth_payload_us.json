@@ -1,6 +1,60 @@
 {
   "market": "us",
-  "date": "2026-11-21",
-  "total": 0,
-  "sectors": []
+  "date": "2026-11-28",
+  "total": 13,
+  "sectors": [
+    {
+      "name": "Technology",
+      "tickers": [
+        "FROG",
+        "YOU"
+      ]
+    },
+    {
+      "name": "Industrials",
+      "tickers": [
+        "ULCC",
+        "HAWK",
+        "EXPD"
+      ]
+    },
+    {
+      "name": "Communication Services",
+      "tickers": [
+        "EVC",
+        "LBTYA",
+        "LBTYK"
+      ]
+    },
+    {
+      "name": "Utilities",
+      "tickers": [
+        "MWH"
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "tickers": [
+        "LQDA"
+      ]
+    },
+    {
+      "name": "Energy",
+      "tickers": [
+        "GRNT"
+      ]
+    },
+    {
+      "name": "미분류",
+      "tickers": [
+        "LION"
+      ]
+    },
+    {
+      "name": "Consumer Defensive",
+      "tickers": [
+        "TBBB"
+      ]
+    }
+  ]
 }
