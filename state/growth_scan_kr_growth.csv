@@ -1,1 +1,4 @@
-﻿ticker,close,avg_vol60,today_vol,adr,week_perf,ema10,sma20,sma50,natr50,name,sector,market_cap,rev_growth,industry,yf_sector,fund_ok,cap_ok,growth_ok,excluded_industry
+﻿ticker,name,yf_sector,industry,close,adr,week_perf,rev_growth,market_cap,avg_vol60,natr50
+051630.KS,진양화학,Basic Materials,Chemicals,4860.0,14.653446100309143,4.9676025917926525,0.637,103031996416.0,35.738586848999994,6.53008356450586
+089890.KQ,코세스,,,35800.0,11.686140879926565,-2.981029810298108,1.8009436150711262,593741611008.0,113.405241875,9.71210261668004
+011200.KS,HMM,Industrials,Marine Shipping,22400.0,4.106407543029911,1.1286681715575675,0.525,21128529575936.0,278.94421717499995,3.75164773118915

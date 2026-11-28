@@ -1,6 +1,25 @@
 {
   "market": "kr",
-  "date": "2026-11-21",
-  "total": 0,
-  "sectors": []
+  "date": "2026-11-28",
+  "total": 3,
+  "sectors": [
+    {
+      "name": "Basic Materials",
+      "tickers": [
+        "051630.KS"
+      ]
+    },
+    {
+      "name": "미분류",
+      "tickers": [
+        "089890.KQ"
+      ]
+    },
+    {
+      "name": "Industrials",
+      "tickers": [
+        "011200.KS"
+      ]
+    }
+  ]
 }
